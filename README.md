@@ -2,6 +2,8 @@
 
 One dashboard, four stores, 10 slides each — every screen is live HTML built from the product UI kit.
 
+**Live:** https://pravarbubby.github.io/linkedphone-store-screenshots/ — opens the latest version; download PNGs per slide or as a .zip per device. Final PNGs are also in [`exports/`](exports/).
+
 | Tab | Device | Size (px) | Layout |
 |---|---|---|---|
 | iOS | iPhone 6.9″ | 1290 × 2796 | Recreation of `refs/ios_1…10.jpg` |
@@ -9,12 +11,12 @@ One dashboard, four stores, 10 slides each — every screen is live HTML built f
 | macOS | macOS window | 2880 × 1800 | MacBook Pro 14″ app (1512×945 pt) at 1.4×; panes: rail 72 · list 360 · centre ≥400 · context 360 |
 | Android | Google Play phone | 1440 × 2880 | iPhone compositions in an Android frame |
 
-## Open the dashboard
+## Open the dashboard locally
 
 ```bash
-python3 serve.py
+python3 -m http.server 8765
 ```
-Run from the project root, then open http://localhost:8765/ (it redirects to `/App%20Store%20Screenshots/`) — it opens the latest version; switch versions from the **Version** picker (each shows its last-updated time).
+Run from this folder, then open http://localhost:8765/ — it opens the latest version; switch versions from the **Version** picker (each shows its last-updated time).
 Tabs switch platform, **Show originals** puts the reference shots next to the iOS slides, click a slide for a full-size view (← → to step), **PNG** downloads the export.
 
 ## Export PNGs
