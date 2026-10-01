@@ -10,7 +10,7 @@
 fetch('../versions.json?t=' + Date.now()).then(r => r.json()).then(l => {
   const ok = new Set(l.map(x => x.v)), latest = l[l.length - 1].v;
   const f = document.createElement('iframe'); f.title = 'LinkedPhone Store Screenshots';
-  const show = () => { const v = location.hash.slice(1); f.src = '../' + (ok.has(v) ? v : latest) + '/index.html'; };
+  const show = () => { const v = location.hash.slice(1); f.src = '../' + (ok.has(v) ? v : latest) + '/index.html?t=' + Date.now(); };
   addEventListener('hashchange', show); show();
   document.body.replaceChildren(f);
 }).catch(() => { document.getElementById('m').textContent = 'Could not load versions.json — serve this folder over HTTP (python3 -m http.server).'; });

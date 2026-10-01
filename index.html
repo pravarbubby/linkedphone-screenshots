@@ -7,7 +7,7 @@
 <script>
 // Shows the newest dashboard (last entry in versions.json) under this clean URL. The version picker lives at ./versions/.
 fetch('versions.json?t=' + Date.now()).then(r => r.json()).then(l => {
-  const f = document.createElement('iframe'); f.title = 'LinkedPhone Store Screenshots'; f.src = l[l.length - 1].v + '/index.html';
+  const f = document.createElement('iframe'); f.title = 'LinkedPhone Store Screenshots'; f.src = l[l.length - 1].v + '/index.html?t=' + Date.now();
   document.body.replaceChildren(f);
 }).catch(() => { document.getElementById('m').textContent = 'Could not load versions.json — serve this folder over HTTP (python3 -m http.server).'; });
 </script></body></html>
