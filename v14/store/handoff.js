@@ -13,14 +13,9 @@ const slug = (t) => t.replace(/[’']/g, '').replace(/[^A-Za-z0-9]+/g, '-').repl
 const src = (p, n) => `../exports/${VER}/${p}/${String(n).padStart(2, '0')}.png`;
 const fileName = (p, n) => `LinkedPhone_${META[p].name}_${String(n).padStart(2, '0')}_${slug(STORE[p][n].title)}_${META[p].size}.png`;
 const zipName = (p) => `LinkedPhone_${META[p].name}_${VER}_${META[p].size}.zip`;
-/* Google Play takes at most 8 phone screenshots: both Android tabs share one pick of 8 (default 1–8). */
+/* Google Play takes at most 8 phone screenshots: Android tabs grey out 9–10 and zip only 1–8. */
 const PLAY_MAX = 8, isAndroid = (p) => p === 'android' || p === 'androidS';
-const PICK_KEY = 'androidPick';
-const loadPick = () => { try { const a = JSON.parse(localStorage.getItem(PICK_KEY)); if (Array.isArray(a) && a.length) return a.filter(n => n >= 1 && n <= 10).slice(0, PLAY_MAX).sort((x, y) => x - y); } catch (e) {} return [1, 2, 3, 4, 5, 6, 7, 8]; };
-let pick = loadPick();
-const savePick = () => { try { localStorage.setItem(PICK_KEY, JSON.stringify(pick)); } catch (e) {} };
-const slidesFor = (p) => isAndroid(p) ? pick.filter(n => STORE[p][n]) : Array.from({ length: 10 }, (_, i) => i + 1).filter(n => STORE[p][n]);
-const zipEntry = (p, n, i) => isAndroid(p) ? fileName(p, n).replace(/_\d\d_/, `_${String(i + 1).padStart(2, '0')}_`) : fileName(p, n);
+const slidesFor = (p) => Array.from({ length: isAndroid(p) ? PLAY_MAX : 10 }, (_, i) => i + 1).filter(n => STORE[p][n]);
 const save = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); };
 const fetchBlob = (u) => fetch(u, { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(u); return r.blob(); });
 
@@ -30,7 +25,7 @@ async function downloadAll(p, btn) {
   try {
     const zip = new JSZip();
     const list = slidesFor(p);
-    for (const [i, n] of list.entries()) zip.file(zipEntry(p, n, i), await fetchBlob(src(p, n)));
+    for (const n of list) zip.file(fileName(p, n), await fetchBlob(src(p, n)));
     save(await zip.generateAsync({ type: 'blob' }), isAndroid(p) ? zipName(p).replace('.zip', `_${list.length}-for-Google-Play.zip`) : zipName(p));
   } catch (e) { alert('Export missing for this version: ' + e.message); }
   btn.disabled = false; btn.textContent = label;
@@ -117,14 +112,8 @@ const CSS = `
 .db-dlall:disabled { opacity:.6; }
 .db-hdl { position:absolute; right:10px; top:10px; z-index:3; opacity:0; transition:opacity .15s; border:0; background:rgba(23,26,43,.86); color:#fff; font:600 12px/1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; padding:8px 11px; border-radius:8px; cursor:pointer; }
 .db-pair:hover .db-hdl { opacity:1; }
-.db-pick { display:flex; align-items:center; gap:5px; margin-left:auto; font:600 12px/1 -apple-system,system-ui; color:#3356FF; background:#E9EDFF; padding:4px 8px; border-radius:6px; cursor:pointer; user-select:none; white-space:nowrap; }
-.db-pick input { margin:0; accent-color:#3356FF; cursor:inherit; }
 .db-card.db-off .db-pair { opacity:.35; filter:grayscale(1); }
 .db-card.db-off .db-t { color:#9A9DB3; }
-.db-card.db-off .db-pick { color:#6B6E85; background:#ECEDF4; }
-.db-card.db-full .db-pick { cursor:not-allowed; opacity:.55; }
-.db-playnote { color:#6B6E85; }
-.db-playnote b { color:#171A2B; }
 `;
 const st = document.createElement('style'); st.textContent = CSS; document.head.append(st);
 const ov = document.createElement('div'); ov.className = 'sp-ov';
@@ -151,36 +140,18 @@ function decorate() {
   const box = document.createElement('div'); box.style.cssText = 'margin-left:auto;display:flex;gap:8px';
   const prev = document.createElement('button'); prev.className = 'db-prev'; prev.textContent = `Preview on ${META[p].store}`; prev.onclick = () => openPreview(p);
   const all = document.createElement('button'); all.className = 'db-dlall'; all.onclick = () => downloadAll(p, all);
-  const note = document.createElement('span'); note.className = 'db-playnote';
-  const sync = () => {
-    all.textContent = isAndroid(p) ? `Download selected ${pick.length} for ${label} (.zip)` : `Download all ${label} (.zip)`;
-    all.disabled = isAndroid(p) && !pick.length;
-    if (!isAndroid(p)) return;
-    note.innerHTML = `Google Play allows ${PLAY_MAX} · <b>${pick.length} of ${PLAY_MAX}</b> selected — tick <b>Include</b> to choose which go in`;
-    document.querySelectorAll('.db-card').forEach((card, i) => {
-      const on = pick.includes(i + 1), cb = card.querySelector('.db-pick input'); if (!cb) return;
-      cb.checked = on; cb.disabled = !on && pick.length >= PLAY_MAX;
-      card.classList.toggle('db-off', !on); card.classList.toggle('db-full', cb.disabled);
-      card.querySelector('.db-pick').title = cb.disabled ? `Google Play allows ${PLAY_MAX} — untick another slide first` : (on ? 'Included in the Google Play zip' : 'Not included — tick to add');
-    });
-  };
-  if (isAndroid(p)) meta.append(note);
+  all.textContent = isAndroid(p) ? `Download ${PLAY_MAX} for ${label} (.zip)` : `Download all ${label} (.zip)`;
+  if (isAndroid(p)) meta.insertAdjacentHTML('beforeend', `<span>Google Play allows ${PLAY_MAX} · 9–10 not included</span>`);
   box.append(prev, all); meta.append(box);
   document.querySelectorAll('.db-card').forEach((card, i) => {
     const n = i + 1; if (!STORE[p][n]) return;
+    card.querySelector('.db-dl')?.remove();
+    if (isAndroid(p) && n > PLAY_MAX) { card.classList.add('db-off'); card.title = `Not included — Google Play allows ${PLAY_MAX}`; return; }
     const pair = card.querySelector('.db-pair'); pair.style.position = 'relative';
     const b = document.createElement('button'); b.className = 'db-hdl'; b.textContent = '↓ Download'; b.title = fileName(p, n);
     b.onclick = (e) => { e.stopPropagation(); downloadOne(p, n); };
     pair.append(b);
-    card.querySelector('.db-dl')?.remove();
-    if (isAndroid(p)) {
-      const lab = document.createElement('label'); lab.className = 'db-pick';
-      const cb = document.createElement('input'); cb.type = 'checkbox';
-      cb.onchange = () => { pick = cb.checked ? [...new Set([...pick, n])].sort((x, y) => x - y).slice(0, PLAY_MAX) : pick.filter(m => m !== n); savePick(); sync(); };
-      lab.append(cb, 'Include'); card.querySelector('.db-cap').append(lab);
-    }
   });
-  sync();
 }
 new MutationObserver(decorate).observe(document.getElementById('main') || document.body, { childList: true, subtree: false });
 decorate();
