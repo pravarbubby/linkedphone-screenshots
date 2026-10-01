@@ -112,18 +112,38 @@ const CSS = `
 .sp-gstats > div:last-child { border:0; }
 .sp-gstats b { font:500 14px Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; } .sp-gstats small { font:400 12px Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; color:#5F6368; }
 .sp-install { background:#0B57D0; color:#fff; text-align:center; font:500 14px/40px Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; border-radius:20px; margin:0 0 18px; }
-.db-dlall, .db-prev { appearance:none; border:1px solid #D7DBF5; background:#fff; color:#3356FF; font:600 13px/1 -apple-system,system-ui; padding:9px 14px; border-radius:9px; cursor:pointer; }
-.db-dlall { background:#3356FF; color:#fff; border-color:#3356FF; }
-.db-dlall:disabled { opacity:.6; }
-.db-hdl { position:absolute; right:10px; top:10px; z-index:3; opacity:0; transition:opacity .15s; border:0; background:rgba(23,26,43,.86); color:#fff; font:600 12px/1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; padding:8px 11px; border-radius:8px; cursor:pointer; }
-.db-pair:hover .db-hdl { opacity:1; }
-.db-card.db-off .db-pair { opacity:.35; filter:grayscale(1); }
-.db-card.db-off .db-t { color:#9A9DB3; }
-.db-pick { display:flex; align-items:center; gap:5px; margin-left:auto; font:600 12px/1 -apple-system,system-ui; color:#3356FF; background:#E9EDFF; padding:4px 8px; border-radius:6px; cursor:pointer; user-select:none; white-space:nowrap; }
-.db-pick input { margin:0; accent-color:#3356FF; cursor:inherit; }
-.db-card.db-off .db-pick { color:#6B6E85; background:#ECEDF4; }
-.db-card.db-full .db-pick { cursor:not-allowed; opacity:.55; }
-.db-playnote b { color:#171A2B; }
+.db-dlall, .db-prev { appearance:none; height:36px; padding:0 14px; border-radius:10px; font:500 14px/1 var(--sf); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:7px; white-space:nowrap; }
+.db-dlall { background:var(--blue); color:#fff; border:1px solid var(--blue); }
+.db-dlall:hover { background:#2747E6; border-color:#2747E6; }
+.db-dlall:disabled { opacity:.5; cursor:default; }
+.db-prev { background:#fff; color:var(--ink); border:1px solid var(--g90); }
+.db-prev:hover { background:var(--g98); }
+.db-dlall svg, .db-prev svg { width:17px; height:17px; flex:none; }
+/* Android status: a 01–10 strip mirroring the grid order, plus one plain sentence */
+.db-dots { display:flex; gap:4px; }
+.db-dots i { width:24px; height:20px; border-radius:5px; font:600 11px/20px var(--sf); font-style:normal; text-align:center; background:var(--blue); color:#fff; }
+.db-dots i.off { background:#fff; color:var(--g60); box-shadow:inset 0 0 0 1px var(--g80); }
+.db-status b { color:var(--ink); font-weight:600; }
+/* card footer: switch on the left, PNG download on the right */
+.db-pick { display:flex; align-items:center; gap:8px; flex:1; min-width:0; height:40px; font:500 13px/1 var(--sf); color:var(--ink); cursor:pointer; user-select:none; }
+.db-pick input { position:absolute; opacity:0; pointer-events:none; }
+.db-sw { width:32px; height:20px; border-radius:10px; background:var(--g80); position:relative; flex:none; transition:background .15s; }
+.db-sw::after { content:""; position:absolute; left:2px; top:2px; width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(23,26,43,.2); transition:left .15s; }
+.db-pick input:checked + .db-sw { background:var(--blue); }
+.db-pick input:checked + .db-sw::after { left:14px; }
+.db-pick input:focus-visible + .db-sw { outline:2px solid var(--blue); outline-offset:2px; }
+.db-fmt { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.db-png { flex:none; width:32px; height:32px; border-radius:8px; border:0; background:none; color:var(--g40); display:grid; place-items:center; cursor:pointer; }
+.db-png:hover { background:var(--blue95); color:var(--blue); }
+.db-png svg { width:18px; height:18px; }
+/* excluded: same card, visibly set aside — dashed outline, muted art and text */
+.db-card.db-off { background:var(--g98); border-style:dashed; border-color:var(--g80); }
+.db-card.db-off .db-media { background:transparent; }
+.db-card.db-off .db-thumb > .db-inner { opacity:.35; filter:grayscale(1); }
+.db-card.db-off .db-t, .db-card.db-off .db-pick { color:var(--g50); }
+.db-card.db-off .db-i { background:var(--g95); color:var(--g50); }
+.db-card.db-full .db-pick { cursor:not-allowed; }
+.db-card.db-full .db-sw { opacity:.45; }
 `;
 const st = document.createElement('style'); st.textContent = CSS; document.head.append(st);
 const ov = document.createElement('div'); ov.className = 'sp-ov';
@@ -141,43 +161,48 @@ function openPreview(p) {
 }
 
 /* ───── wire into the dashboard (re-run after every redraw) ───── */
+const IC_DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>';
+const IC_EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>';
 function decorate() {
   const meta = document.querySelector('.db-meta'); if (!meta || meta.dataset.dec) return;
   meta.dataset.dec = 1;
   const tab = document.querySelector('nav.db-tabs button[aria-selected=true]');
   const label = tab ? tab.firstChild.textContent.trim() : 'iOS';
   const p = { 'iOS': 'ios', 'iPadOS': 'ipad', 'macOS': 'mac', 'Android': 'android', 'Android small': 'androidS' }[label] || 'ios';
-  const box = document.createElement('div'); box.style.cssText = 'margin-left:auto;display:flex;gap:8px';
-  const prev = document.createElement('button'); prev.className = 'db-prev'; prev.textContent = `Preview on ${META[p].store}`; prev.onclick = () => openPreview(p);
+  const box = meta.querySelector('.db-actions'), status = meta.querySelector('.db-status');
+  const prev = document.createElement('button'); prev.className = 'db-prev'; prev.innerHTML = `${IC_EYE}Preview on ${META[p].store}`; prev.onclick = () => openPreview(p);
   const all = document.createElement('button'); all.className = 'db-dlall'; all.onclick = () => downloadAll(p, all);
-  const note = document.createElement('span'); note.className = 'db-playnote';
+  box.append(prev, all);
   const sync = () => {
-    all.textContent = isAndroid(p) ? `Download selected ${pick.length} for ${label} (.zip)` : `Download all ${label} (.zip)`;
+    all.innerHTML = IC_DL + (isAndroid(p) ? `Download ${pick.length} for Google Play` : `Download all ${slidesFor(p).length}`) + ' (.zip)';
     all.disabled = isAndroid(p) && !pick.length;
     if (!isAndroid(p)) return;
-    note.innerHTML = `Google Play allows ${PLAY_MAX} · <b>${pick.length} of ${PLAY_MAX}</b> included`;
+    const left = PLAY_MAX - pick.length;
+    status.innerHTML = `<span class="db-dots" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<i${pick.includes(i + 1) ? '' : ' class="off"'}>${String(i + 1).padStart(2, '0')}</i>`).join('')}</span>` +
+      `<span><b>${pick.length} of ${PLAY_MAX}</b> selected · Google Play allows up to ${PLAY_MAX}. ` + (left ? `You can add ${left} more.` : `Switch one off to add another.`) + `</span>`;
     document.querySelectorAll('.db-card').forEach((card, i) => {
       const cb = card.querySelector('.db-pick input'); if (!cb) return;
       const on = pick.includes(i + 1); cb.checked = on; cb.disabled = !on && pick.length >= PLAY_MAX;
       card.classList.toggle('db-off', !on); card.classList.toggle('db-full', cb.disabled);
-      card.querySelector('.db-pick').title = cb.disabled ? `Google Play allows ${PLAY_MAX} — untick another slide first` : on ? 'Included in the Google Play zip' : 'Not included — tick to add';
+      card.querySelector('.db-pick-t').textContent = on ? 'Included' : 'Not included';
+      card.querySelector('.db-pick').title = cb.disabled ? `Google Play allows ${PLAY_MAX} — switch another slide off first` : '';
     });
   };
-  if (isAndroid(p)) meta.append(note);
-  box.append(prev, all); meta.append(box);
   document.querySelectorAll('.db-card').forEach((card, i) => {
-    const n = i + 1; if (!STORE[p][n]) return;
-    card.querySelector('.db-dl')?.remove();
-    const pair = card.querySelector('.db-pair'); pair.style.position = 'relative';
-    const b = document.createElement('button'); b.className = 'db-hdl'; b.textContent = '↓ Download'; b.title = fileName(p, n);
-    b.onclick = (e) => { e.stopPropagation(); downloadOne(p, n); };
-    pair.append(b);
+    const n = i + 1, foot = card.querySelector('.db-foot'); if (!STORE[p][n] || !foot) return;
     if (isAndroid(p)) {
       const lab = document.createElement('label'); lab.className = 'db-pick';
-      const cb = document.createElement('input'); cb.type = 'checkbox';
+      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.setAttribute('role', 'switch'); cb.setAttribute('aria-label', `Include ${STORE[p][n].title} in the Google Play download`);
+      const sw = document.createElement('span'); sw.className = 'db-sw';
+      const t = document.createElement('span'); t.className = 'db-pick-t';
       cb.onchange = () => { pick = cb.checked ? [...new Set([...pick, n])].sort((x, y) => x - y).slice(0, PLAY_MAX) : pick.filter(m => m !== n); savePick(); sync(); };
-      lab.append(cb, 'Include'); card.querySelector('.db-cap').append(lab);
+      lab.append(cb, sw, t); foot.append(lab);
+    } else {
+      const f = document.createElement('span'); f.className = 'db-fmt'; f.textContent = `PNG · ${META[p].size.replace('x', ' × ')}`; foot.append(f);
     }
+    const b = document.createElement('button'); b.className = 'db-png'; b.innerHTML = IC_DL; b.title = 'Download ' + fileName(p, n); b.setAttribute('aria-label', 'Download PNG');
+    b.onclick = (e) => { e.stopPropagation(); downloadOne(p, n); };
+    foot.append(b);
   });
   sync();
 }

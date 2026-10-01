@@ -3,41 +3,51 @@
 <title>LinkedPhone Store Screenshots</title>
 <link rel="stylesheet" href="kit/ui.css?v=1790853236"><link rel="stylesheet" href="kit/desktop.css?v=1790853236"><link rel="stylesheet" href="store/store.css?v=1790853236">
 <style>
-  :root { --page: #F4F5FA; --panel: #FFFFFF; --ink: #171A2B; --muted: #6B6E85; --line: #E3E5F2; --accent: #3356FF; --accent-soft: #E9EDFF; }
-  html, body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 -apple-system, "SF Pro Text", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  header.db-top { position: sticky; top: 0; z-index: 20; background: rgba(244,245,250,.86); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
+  :root { --page: var(--g98); --panel: #FFFFFF; --muted: var(--g40); --line: var(--g90); --accent: var(--blue); --accent-soft: var(--blue95); }
+  html, body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 var(--sf); -webkit-font-smoothing: antialiased; }
+  header.db-top { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.92); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
   .db-bar { display: flex; align-items: center; gap: 14px; padding: 14px 28px 0; flex-wrap: wrap; }
-  .db-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; letter-spacing: -.1px; }
+  .db-brand { display: flex; align-items: center; gap: 10px; font: 800 18px/1 var(--sf); letter-spacing: -.2px; }
   .db-brand svg { width: 26px; height: 26px; }
-  .db-ver { font: 600 12px/1 -apple-system, system-ui; color: var(--accent); background: var(--accent-soft); padding: 5px 8px; border-radius: 6px; }
+  .db-ver { font: 500 13px/1 var(--sf); color: var(--ink); background: var(--blue95); padding: 5px 8px; border-radius: 6px; }
   .db-bar .db-sp { flex: 1; }
   .db-ctl { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; }
   .db-ctl input[type=range] { width: 120px; accent-color: var(--accent); }
   .db-ctl label { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
   .db-ctl input[type=checkbox] { accent-color: var(--accent); }
-  nav.db-tabs { display: flex; gap: 4px; padding: 12px 22px 0; overflow-x: auto; }
-  nav.db-tabs button { appearance: none; border: 0; background: none; padding: 10px 14px 12px; font: 500 14px/1 -apple-system, system-ui; color: var(--muted); border-bottom: 2px solid transparent; cursor: pointer; display: flex; gap: 8px; align-items: center; white-space: nowrap; }
-  nav.db-tabs button .db-n { font-size: 11.5px; font-weight: 600; color: var(--muted); background: #E6E8F3; border-radius: 10px; padding: 3px 7px; }
-  nav.db-tabs button[aria-selected=true] { color: var(--ink); border-bottom-color: var(--accent); }
-  nav.db-tabs button[aria-selected=true] .db-n { background: var(--accent-soft); color: var(--accent); }
-  nav.db-tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 6px; }
-  main { padding: 22px 28px 60px; }
-  .db-meta { display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; margin-bottom: 18px; color: var(--muted); }
-  .db-meta h2 { margin: 0; font-size: 20px; color: var(--ink); letter-spacing: -.2px; }
-  .db-strip { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
-  .db-card { display: flex; flex-direction: column; gap: 9px; }
+  nav.db-tabs { display: flex; gap: 8px; padding: 14px 28px 14px; overflow-x: auto; scrollbar-width: none; }
+  nav.db-tabs::-webkit-scrollbar { display: none; }
+  nav.db-tabs button { appearance: none; flex: none; height: 38px; border-radius: 20px; border: 1px solid var(--g90); background: #fff; padding: 0 14px; font: 400 15px/1 var(--sf); color: var(--ink); cursor: pointer; display: flex; gap: 8px; align-items: center; white-space: nowrap; }
+  nav.db-tabs button:hover { background: var(--g98); }
+  nav.db-tabs button .db-n { font: 500 12px/1 var(--sf); color: var(--g40); background: var(--g95); border-radius: 10px; padding: 4px 7px; }
+  nav.db-tabs button[aria-selected=true] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  nav.db-tabs button[aria-selected=true] .db-n { background: rgba(255,255,255,.18); color: #fff; }
+  nav.db-tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  main { padding: 24px 28px 64px; max-width: 1480px; margin: 0 auto; box-sizing: border-box; }
+  /* section panel: title + actions + (Android) status — one region for everything that acts on the whole set */
+  .db-meta { background: #fff; border: 1px solid var(--g90); border-radius: 16px; margin-bottom: 20px; }
+  .db-head { display: flex; gap: 12px 24px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 16px 20px; }
+  .db-meta h2 { margin: 0; font: 700 20px/26px var(--sf); color: var(--ink); letter-spacing: -.3px; }
+  .db-sub { color: var(--g40); font: 400 13px/18px var(--sf); }
+  .db-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .db-status { display: flex; gap: 10px 16px; align-items: center; flex-wrap: wrap; padding: 12px 20px; border-top: 1px solid var(--g95); font: 400 13px/18px var(--sf); color: var(--g40); }
+  .db-status:empty { display: none; }
+  /* slide grid: equal cards that fill the row */
+  .db-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--cw), 1fr)); gap: var(--gap); }
+  .db-card { display: flex; flex-direction: column; min-width: 0; background: #fff; border: 1px solid var(--g90); border-radius: 14px; overflow: hidden; transition: background .15s, border-color .15s; }
+  .db-media { position: relative; display: flex; justify-content: center; padding: 12px; background: var(--g98); border-bottom: 1px solid var(--g95); }
   .db-pair { display: flex; gap: 8px; }
-  .db-thumb { position: relative; overflow: hidden; border-radius: 14px; background: #fff; box-shadow: 0 1px 2px rgba(23,26,43,.06), 0 6px 22px rgba(23,26,43,.07); cursor: zoom-in; }
-  .db-thumb.db-ref { cursor: default; outline: 2px dashed #C9CDE6; outline-offset: -2px; }
+  .db-thumb { position: relative; overflow: hidden; border-radius: 8px; background: #fff; box-shadow: 0 0 0 1px var(--g90); cursor: zoom-in; }
+  .db-thumb.db-ref { cursor: default; box-shadow: 0 0 0 1.5px var(--g80); }
   .db-thumb > .db-inner { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
   .db-thumb img { display: block; width: 100%; height: 100%; object-fit: fill; }
-  .db-cap { display: flex; gap: 8px; align-items: center; font-size: 13px; }
-  .db-cap .db-i { font: 600 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); }
-  .db-cap .db-t { font-weight: 500; }
-  .db-dl { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; padding: 3px 8px; border-radius: 6px; background: var(--accent-soft); }
-  .db-dl:hover { background: #DCE2FF; }
-  .db-cap .db-tag { font-size: 11px; color: var(--muted); }
-  .db-empty { border: 1.5px dashed #CDD1E8; border-radius: 14px; display: grid; place-items: center; color: var(--muted); text-align: center; padding: 16px; font-size: 13px; }
+  .db-cap { display: flex; gap: 8px; align-items: flex-start; padding: 10px 12px 8px; }
+  .db-cap .db-i { flex: none; width: 26px; height: 20px; border-radius: 6px; background: var(--blue95); font: 600 12px/20px var(--sf); color: var(--blue); text-align: center; }
+  .db-cap .db-t { flex: 1; min-width: 0; font: 600 14px/20px var(--sf); color: var(--ink); min-height: 40px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .db-foot { display: flex; align-items: center; gap: 8px; min-height: 40px; margin-top: auto; padding: 0 8px 0 12px; border-top: 1px solid var(--g95); font: 400 12px/1 var(--sf); color: var(--g50); }
+  .db-foot:empty { display: none; }
+  .db-dl { display: none; }
+  .db-empty { border: 1.5px dashed var(--g80); border-radius: 8px; display: grid; place-items: center; color: var(--g40); text-align: center; padding: 16px; font-size: 13px; box-sizing: border-box; }
   .db-lb { position: fixed; inset: 0; z-index: 50; background: rgba(14,16,30,.82); display: none; place-items: center; }
   .db-lb.db-open { display: grid; }
   .db-lb .db-stage { position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 20px 80px rgba(0,0,0,.5); }
@@ -45,12 +55,12 @@
   .db-lb .db-hint { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #C9CCE4; font-size: 12.5px; }
   body.render { background: transparent; }
   body.render header, body.render main { display: none; }
-  @media (max-width: 640px) { .db-bar, main { padding-left: 16px; padding-right: 16px; } nav.db-tabs { padding-left: 10px; } }
+  @media (max-width: 640px) { .db-bar, main, nav.db-tabs { padding-left: 16px; padding-right: 16px; } .db-head, .db-status { padding-left: 14px; padding-right: 14px; } .db-media { padding: 8px; } .db-actions, .db-actions > * { width: 100%; justify-content: center; } .db-brand { font-size: 16px; } .db-brand .db-co { display: none; } #cmpWrap { display: none !important; } .db-bar { flex-wrap: nowrap; padding-top: 12px; } .db-bar .db-sp { min-width: 0; } .db-ctl > span, .db-ctl input[type=range] { display: none; } }
 </style></head>
 <body>
 <header class="db-top">
   <div class="db-bar">
-    <div class="db-brand"><svg viewBox="0 0 100 100"><path d="M38.2 61.8h-7.8a7.8 7.8 0 1 0 7.8 7.8Zm39.2-23.9a15.3 15.3 0 0 0-30.5 0v15.3h15.2c8.4 0 15.3-6.9 15.3-15.3Zm8.6 0c0 13.2-10.7 23.9-23.9 23.9H46.8v7.8a16.4 16.4 0 1 1-16.4-16.4h7.8V37.9a23.9 23.9 0 0 1 47.8 0Z" fill="#3356FF"/></svg>LinkedPhone · Store Screenshots</div>
+    <div class="db-brand"><svg viewBox="0 0 100 100"><path d="M38.2 61.8h-7.8a7.8 7.8 0 1 0 7.8 7.8Zm39.2-23.9a15.3 15.3 0 0 0-30.5 0v15.3h15.2c8.4 0 15.3-6.9 15.3-15.3Zm8.6 0c0 13.2-10.7 23.9-23.9 23.9H46.8v7.8a16.4 16.4 0 1 1-16.4-16.4h7.8V37.9a23.9 23.9 0 0 1 47.8 0Z" fill="#3356FF"/></svg><span><span class="db-co">LinkedPhone · </span>Store Screenshots</span></div>
     <span class="db-ver">V14</span>
     <span class="db-sp"></span>
     <div class="db-ctl">
@@ -112,8 +122,7 @@ if (q.get('only')) {
     tabsEl.innerHTML = '';
     PLATFORMS.forEach(P => {
       const b = document.createElement('button'); b.role = 'tab'; b.setAttribute('aria-selected', P.key === cur);
-      const n = (STORE[P.key] || []).filter(Boolean).length;
-      b.innerHTML = `${P.label}<span class="db-n">${n}/10</span>`;
+      b.textContent = P.label;
       b.onclick = () => { cur = P.key; store('tab', cur); draw(); };
       tabsEl.append(b);
     });
@@ -121,10 +130,16 @@ if (q.get('only')) {
     document.getElementById('cmpWrap').style.display = P.refs ? '' : 'none';
     main.innerHTML = '';
     const meta = document.createElement('div'); meta.className = 'db-meta';
-    meta.innerHTML = `<h2>${P.label}</h2><span>${P.device} · ${P.size} px</span><span>${(STORE[P.key] || []).filter(Boolean).length} of 10 slides built</span>`;
+    const builtN = (STORE[P.key] || []).filter(Boolean).length;
+    meta.innerHTML = `<div class="db-head"><div class="db-titles"><h2>${P.label}</h2><div class="db-sub">${P.device} · ${P.size} px${builtN < 10 ? ` · ${builtN} of 10 slides built` : ''}</div></div><div class="db-actions"></div></div><div class="db-status"></div>`;
     main.append(meta);
     const strip = document.createElement('div'); strip.className = 'db-strip';
-    const [W0, H0] = STORE.SIZES[P.key]; const H = Math.round(+zoom.value * (W0 > H0 ? .62 : 1)); const Wt = W0 * H / H0;
+    // Thumbnail size: the Size slider, capped so a phone fits two portrait (or one landscape) cards per row.
+    const [W0, H0] = STORE.SIZES[P.key], per = P.refs && cmp.checked ? 2 : 1, gap = innerWidth <= 640 ? 10 : 16, pad = innerWidth <= 640 ? 18 : 26;
+    const avail = main.clientWidth - parseFloat(getComputedStyle(main).paddingLeft) * 2;
+    const cols = W0 > H0 ? 1 : 2, maxW = (Math.floor((avail - gap * (cols - 1)) / cols) - 2 - pad - (per - 1) * 8) / per;
+    const H = Math.round(Math.min(+zoom.value * (W0 > H0 ? .62 : 1), maxW * H0 / W0)); const Wt = W0 * H / H0;
+    strip.style.setProperty('--cw', Math.floor(Wt * per + (per - 1) * 8 + pad + 2) + 'px'); strip.style.setProperty('--gap', gap + 'px');
     for (let n = 1; n <= 10; n++) {
       const card = document.createElement('div'); card.className = 'db-card';
       const pair = document.createElement('div'); pair.className = 'db-pair';
@@ -135,7 +150,9 @@ if (q.get('only')) {
       const cap = document.createElement('div'); cap.className = 'db-cap';
       const nn = String(n).padStart(2, '0');
       cap.innerHTML = `<span class="db-i">${nn}</span><span class="db-t">${def ? def.title : (STORE.ios[n] ? STORE.ios[n].title : '')}</span>` + (def ? `<a class="db-dl" href="../exports/${VER}/${P.key}/${nn}.png" download="LinkedPhone-${P.key}-${nn}.png">PNG</a>` : '');
-      card.append(pair, cap); strip.append(card);
+      const media = document.createElement('div'); media.className = 'db-media'; media.append(pair);
+      const foot = document.createElement('div'); foot.className = 'db-foot';
+      card.append(media, cap, foot); strip.append(card);
     }
     main.append(strip);
   }
@@ -159,7 +176,8 @@ if (q.get('only')) {
   });
   cmp.onchange = () => { store('cmp', cmp.checked ? '1' : '0'); draw(); };
   zoom.oninput = () => { store('zoom', zoom.value); draw(); };
+  let lastW = innerWidth, rt; addEventListener('resize', () => { if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(rt); rt = setTimeout(draw, 150); });
   draw();
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script src="store/handoff.js?v=14d"></script><script src="../versions-nav.js"></script></body></html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script src="store/handoff.js?v=14h"></script><script src="../versions-nav.js"></script></body></html>
