@@ -5,7 +5,7 @@ One dashboard, four stores, 10 slides each — every screen is live HTML built f
 **Live:** https://pravarbubby.github.io/linkedphone-screenshots/ — always the latest version; download PNGs per slide or as a .zip per device. Final PNGs are also in [`exports/`](exports/).
 **All versions:** https://pravarbubby.github.io/linkedphone-screenshots/versions/ — same dashboard with the **Version** picker (`…/versions/#v12` links to one version).
 
-Google Play takes at most 8 phone screenshots, so on both Android tabs slides 9–10 are greyed out and **Download 8 for Android (.zip)** zips slides 1–8 only.
+Google Play takes at most 8 phone screenshots. On both Android tabs, 08 Transfer Calls and 10 Built to Grow start greyed out; tick **Include** to swap slides in or out (8 max). **Download selected 8 for Android (.zip)** zips only the included ones, keeping their 01–10 numbers.
 
 | Tab | Device | Size (px) | Layout |
 |---|---|---|---|
