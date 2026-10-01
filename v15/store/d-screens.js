@@ -73,7 +73,7 @@ function rail(H, active) {
   [['Inbox', 'Inbox', 1], ['Calls', 'Call'], ['Tickets', 'Clipboard check / task'], ['Contacts', 'Name / ID Card']].forEach(([k, n, bd], i) => item(k, n, 95 + 48 * i, bd));
   r.append(h('div', 'dk-sep', { top: H - 182 + 'px' }));
   [['Support', 'Support'], ['AI', 'Star / AI 3']].forEach(([k, n], i) => item(k, n, H - 151 + 49 * i));
-  r.append(h('div', 'dk-me', { top: H - 52 + 'px', left: '18px', width: '36px', height: '36px', backgroundImage: img('raju') }));
+  r.append(h('div', 'dk-me', { top: H - 52 + 'px', left: '18px', width: '36px', height: '36px', backgroundImage: img('bob') }));
   return r;
 }
 function root(W, H, active) {
@@ -91,7 +91,7 @@ function listHead(c, title, chips, first, w = 360) {
   const ch = h('div', 'dk-chips');
   ch.append(h('div', 'dk-chip', 'padding:0 12px 0 14px;gap:8px', [I('Filter 2|Light', 'width:22px;height:22px'), I(first, 'width:18px;height:18px')]));
   chips.forEach(t => ch.append(h('div', 'dk-chip', null, t)));
-  c.append(ch, h('div', 'dk-chipfade', { left: w - 40 + 'px' }), h('div', 'dk-chipnext', { left: w - 56 + 'px' }, I('chev', 'width:20px;height:20px')));
+  c.append(ch, h('div', 'dk-chipfade', { left: w - 76 + 'px', width: '76px', background: 'linear-gradient(90deg, rgba(255,255,255,0), #fff 42%)' }), h('div', 'dk-chipnext', { left: w - 56 + 'px' }, I('chev', 'width:20px;height:20px')));
 }
 
 /* ───────── Inbox list ───────── */
@@ -101,7 +101,7 @@ const IROWS = [
   { av: 'michael', name: 'Michael Brown', when: '3:15 am', sub: ['Outgoing Call|Bold', 'Sandy dialed'], lines: ['“Hi Michael. This is Sandy. I just wanted to follow up'], key: 'michael' },
   { av: 'kevin', name: 'Kevin Lui', when: '8:30 pm', lines: ['Thank you! What’s the status on my order?'], badge: 1, key: 'kevin' },
   { def: 'group', name: 'Daniela Wilson +2 more', when: '4:05 am', lines: ['I’m really excited about this project and I look forward to working with you!'], c2: true },
-  { av: 'ethan', name: 'Ethan Williams', when: '3:15 am', sub: ['Incoming Call|Bold', 'Alberto answered · Sales'], lines: ['“Ethan, I am so glad you called. I’d like to…”'], tag: 'Response due today' },
+  { av: 'ethan', name: 'Ethan Williams', when: '3:15 am', sub: ['Incoming Call|Bold', 'Andre answered · Sales'], lines: ['“Ethan, I am so glad you called. I’d like to…”'], tag: 'Response due today' },
   { def: 'unknown', name: 'keisha.morgan@gmail.com', when: '3:01 am', lines: ['Tax documents for my 2025 return', 'Hi! Attaching my W-2 and 1099 forms for you…'], badge: 1 },
   { def: 'campaign', name: 'Spring Tune-Up Special', when: '3:15 am', lines: ['Book your AC tune-up before May 31 and save 20% on parts & labor.'], c2: true },
   { av: 'judith', name: 'Judith Rodriguez', when: '2:50 am', sub: ['Photo / Media|Bold', '3 Photos'], lines: [], badge: 3 },
@@ -134,19 +134,19 @@ function inboxCol(x, H, selKey) {
 const CROWS = [
   { t: 'call_answered', name: 'Noah Anderson', rec: true, sub: 'Lisa answered · 9:20 am', key: 'noah' },
   { t: 'call_missed_ah', name: 'Ivy Turner', vm: true, sub: 'No-one answered · 9:14 am' },
-  { t: 'call_answered', name: 'Michael Brown', rec: true, sub: 'Ashley answered · 9:05 am', key: 'michael' },
-  { t: 'call_transfer', name: 'Keisha Morgan', rec: true, sub: 'Sandy → Alberto · 8:52 am', key: 'keisha' },
-  { t: 'call_dialed', name: 'Jonas Muller', sub: 'Sandy dialed · 8:47 am' },
-  { t: 'call_answered', name: 'Ravi Chandran', rec: true, sub: 'Ravi answered · CPA Team · 8:31 am', key: 'ravi' },
+  { t: 'call_answered', name: 'Michael Brown', rec: true, sub: 'Alexis answered · 9:05 am', key: 'michael' },
+  { t: 'call_transfer', name: 'Keisha Morgan', rec: true, sub: 'Sandy → Andre · 8:52 am', key: 'keisha' },
+  { t: 'call_dialed', name: 'Jonas Miller', sub: 'Sandy dialed · 8:47 am' },
+  { t: 'call_answered', name: 'Ravi Chandran', rec: true, sub: 'Krishna answered · CPA Team · 8:31 am', key: 'ravi' },
   { t: 'call_hungup', name: 'Barry Hill', sub: 'Caller hung up · 8:20 am' },
   { t: 'call_missed', name: 'Liam Johnson', sub: 'No-one answered · 8:15 am' },
   { t: 'call_failed_ah', name: 'Kevin Lui', sub: 'Sandy dialed · Failed · 7:58 am' },
-  { t: 'call_dialed', name: 'Emma Brooks', rec: true, sub: 'Alberto dialed · 7:46 am' },
+  { t: 'call_dialed', name: 'Emma Brooks', rec: true, sub: 'Andre dialed · 7:46 am' },
   { t: 'call_answered', name: 'Judith Rodriguez', rec: true, sub: 'Krishna answered · 7:31 am' },
   { t: 'call_missed_ah', name: 'Priya Shah', vm: true, sub: 'No-one answered · 7:12 am' },
-  { t: 'call_dialed', name: 'Sophia Turner', rec: true, sub: 'Krishna dialed · 7:05 am' },
-  { t: 'call_answered', name: 'Alice Grossman', sub: 'Ashley answered · 6:58 am' },
-  { t: 'call_hungup', name: 'Marcus Reed', sub: 'Caller hung up · 6:40 am' },
+  { t: 'call_dialed', name: 'Sophia Bennett', rec: true, sub: 'Krishna dialed · 7:05 am' },
+  { t: 'call_answered', name: 'Alice Grossman', sub: 'Alexis answered · 6:58 am' },
+  { t: 'call_hungup', name: 'Derek Hall', sub: 'Caller hung up · 6:40 am' },
   { t: 'call_answered', name: 'Daniela Wilson', rec: true, sub: 'Sandy answered · 6:31 am' },
 ];
 function crow(r, sel) {
@@ -167,21 +167,21 @@ function callsCol(x, H, selKey) {
 
 /* ───────── AI summary pane ───────── */
 const SUM = {
-  michael: { t1: 'Michael called you', t2: 'Ashley answered', ended: 'Inbound call ended at 9:05 am · Duration 2:34',
-    flow: [[emo('☀️'), 'Start'], [h('div', 'num', null, '2'), 'Bookings'], [h('div', 'fav', { backgroundImage: img('alexis') }), 'Ashley answered · 2:34'], ['End']],
+  michael: { t1: 'Michael called you', t2: 'Alexis answered', ended: 'Inbound call ended at 9:05 am · Duration 2:34',
+    flow: [[emo('☀️'), 'Start'], [h('div', 'num', null, '2'), 'Bookings'], [h('div', 'fav', { backgroundImage: img('alexis') }), 'Alexis answered · 2:34'], ['End']],
     bullets: ['Michael called to book a haircut and beard trim.', 'Looking for an appointment this Saturday morning.', 'Asked for Jessica, his usual barber.', 'Confirmed for Saturday at 11:30 AM.'],
     fu: [['Profile|Light', 'Update contact details with the preferred barber as “Jessica”', 'Accept Edit'], ['Clipboard check / task|Light', 'Haircut + beard trim with Jessica on Saturday at 11:30 AM.', 'Create Ticket']] },
   noah: { t1: 'Noah called you', t2: [h('div', 'cl-lisa'), 'Lisa answered'], ended: 'Inbound call ended at 9:20 am · Duration 2:34',
     flow: [[emo('☀️'), 'Start'], [h('div', 'cl-lisa', 'width:18px;height:18px'), 'Lisa answered · 2:34'], [I('Tag|Light'), 'Lead captured'], ['End']],
     bullets: ['Noah called to book a 60-minute deep-tissue massage.', 'Prefers a weekday evening appointment after 5 pm.', 'Asked if his insurance covers the massage.', 'Lisa shared prices and sent the booking link by text.'], lead: 'Deep-tissue massage, weekday evening after 5 pm',
     fu: [['Profile|Light', 'Update contact details with the insurance provider as “BlueCross”', 'Accept Edit'], ['Clipboard check / task|Light', 'Book a 60-minute deep-tissue massage, weekday after 5 pm.', 'Create Ticket']] },
-  ravi: { t1: 'Ravi called you', t2: 'Ravi answered · CPA Team', ended: 'Inbound call ended at 8:31 am · Duration 4:12',
-    flow: [[emo('☀️'), 'Start'], [h('div', 'num', null, '2'), 'CPA Team'], [h('div', 'fav', { backgroundImage: img('ravi') }), 'Ravi answered · 4:12'], ['End']],
+  ravi: { t1: 'Ravi called you', t2: 'Krishna answered · CPA Team', ended: 'Inbound call ended at 8:31 am · Duration 4:12',
+    flow: [[emo('☀️'), 'Start'], [h('div', 'num', null, '2'), 'CPA Team'], [h('div', 'fav', { backgroundImage: img('raju') }), 'Krishna answered · 4:12'], ['End']],
     bullets: ['Caller pressed 2 and was routed to the CPA Team.', 'Asked to move his tax-prep meeting to next week.', 'Rescheduled for Tuesday at 10:00 AM.'],
     fu: [['Clipboard check / task|Light', 'Send updated engagement letter before Tuesday’s meeting.', 'Create Ticket']] },
   keisha: { t1: 'Keisha called you', t2: 'Sandy answered', ended: 'Inbound call · In progress',
-    flow: [[emo('☀️'), 'Start'], [h('div', 'num', null, '1'), 'Sales'], [h('div', 'fav', { backgroundImage: img('jesse') }), 'Sandy answered'], [I('Call Transfer|Light'), 'Transferring…']],
-    bullets: ['Keisha needs tax documentation for her 2025 return.', 'Asked to speak with someone from billing.', 'Sandy is transferring the call to Sarah.'], lead: 'Copy of 2025 tax documents for her return',
+    flow: [[emo('☀️'), 'Start'], [h('div', 'num', null, '1'), 'Sales'], [h('div', 'fav', { backgroundImage: img('sandy') }), 'Sandy answered'], [I('Call Transfer|Light'), 'Transferring…']],
+    bullets: ['Keisha needs tax documentation for her 2025 return.', 'Asked to speak with someone from billing.', 'Sandy is transferring the call to Alexis.'], lead: 'Copy of 2025 tax documents for her return',
     fu: [['Clipboard check / task|Light', 'Email Keisha a copy of her 2025 tax documents.', 'Create Ticket']] },
 };
 /* the Summary section of the AI summary pane (heading, bullets, sentiment) — also used for pop-outs */
@@ -241,7 +241,7 @@ const CONV = {
         h('div', 'dk-cb', null, [h('div', 'dk-ct', null, ['Sandy dialed', h('span', 'dk-rec', null, 'REC')]), h('div', 'dk-cs', null, 'Michael answered · 9:12 am')]), I('chev', 'width:22px;height:22px;color:#444658')]),
         h('div', 'dk-sum', null, [h('span', null, 'color:#444658', 'Summary: '), 'Confirmed the bouquet order and delivery address. Michael asked for delivery before noon.… ', h('b', null, 'color:#3356FF;font-weight:500', 'Show More')])]),
       h('div', 'dk-out', { marginTop: '22px', width: Math.min(560, cw - 40) + 'px' }, [h('div', 'dk-txt', 'min-height:44px;max-width:none', 'Great news, Michael! We’ll have them delivered by noon today 💐'),
-        h('div', 'dk-meta', 'margin-top:9px', [h('div', 'mav', { backgroundImage: img('jesse') }), 'Sandy · 9:41 am']), I('Double checkmark|Light', 'position:absolute;right:12px;bottom:14px;width:20px;height:20px;color:#5C5D71')]),
+        h('div', 'dk-meta', 'margin-top:9px', [h('div', 'mav', { backgroundImage: img('sandy') }), 'Sandy · 9:41 am']), I('Double checkmark|Light', 'position:absolute;right:12px;bottom:14px;width:20px;height:20px;color:#5C5D71')]),
     ] },
   kevin: { av: 'kevin', name: 'Kevin Lui', num: '+1 (415) 555-0142',
     msgs: (cw) => {
@@ -262,7 +262,7 @@ const CONV = {
           h('div', 'dk-meta', 'margin-top:8px', [h('div', 'mav', { backgroundImage: img('jesse') }), 'Jesse · 9:02 am'])]),
         inT('Thank you! What’s the status on my order?', '8:30 pm'),
       ]; } },
-  ticket: { av: 'jonas', name: '#128 Jonas Muller', num: 'Contact ticket · Active', ticket: true, fromTop: true,
+  ticket: { av: 'jonas', name: '#128 Jonas Miller', num: 'Contact ticket · Active', ticket: true, fromTop: true,
     msgs: (cw) => {
       const W2 = Math.min(560, cw - 40);
       const ev = (t, who, tm) => h('div', '', 'align-self:center;text-align:center;margin-top:16px', [
@@ -283,7 +283,7 @@ const CONV = {
         ev(['Ticket ', h('span', '', 'display:inline-flex;align-items:center;gap:4px;font-weight:600', [svg(STATUS, 'width:15px;height:15px'), 'Created'])], 'Alexis Johnson', '9:20 am'),
         ev(['Priority changed to ', h('span', null, 'color:#B23220;font-weight:600', '!!! High')], 'Alexis Johnson', '9:21 am'),
         note(txt('Jonas is opening a second location and needs a quote for a full office fit-out by June.'), 'Alexis Johnson', 'alexis', '9:24 am'),
-        note(sub([h('div', '', `width:36px;height:36px;border-radius:10px;background:${img('jonas')} center/cover`), h('div', null, null, [h('div', '', 'font:500 15px/20px var(--sf)', 'Jonas Muller'), h('div', '', 'font:400 13px/18px var(--sf);color:#5C5D71', 'Contact info')])]), 'Alexis Johnson', 'alexis', '9:25 am'),
+        note(sub([h('div', '', `width:36px;height:36px;border-radius:10px;background:${img('jonas')} center/cover`), h('div', null, null, [h('div', '', 'font:500 15px/20px var(--sf)', 'Jonas Miller'), h('div', '', 'font:400 13px/18px var(--sf);color:#5C5D71', 'Contact info')])]), 'Alexis Johnson', 'alexis', '9:25 am'),
         note(sub([h('div', '', 'width:36px;height:36px;border-radius:10px;background:#EFF0FE;display:grid;place-items:center', I('File / Document|Light', 'width:20px;height:20px')), h('div', null, null, [h('div', '', 'font:500 15px/20px var(--sf)', 'Office_FitOut_Brief.pdf'), h('div', '', 'font:400 13px/18px var(--sf);color:#5C5D71', '2.3 MB · pdf')])]), 'Alexis Johnson', 'alexis', '9:27 am'),
         ev(['Owner changed to ', h('span', '', 'display:inline-flex;align-items:center;gap:5px;font-weight:600', [h('span', '', `width:18px;height:18px;border-radius:50%;background:${img('alexis')} center/cover;display:inline-block`), 'Alexis Johnson'])], 'Jesse Di Lucca', '9:30 am'),
         ev(['Status changed to ', h('span', '', 'display:inline-flex;align-items:center;gap:5px;font-weight:600', [dot('#4B8A1E'), 'Active'])], 'Alexis Johnson', '9:31 am'),
@@ -354,7 +354,7 @@ function ticketDetails(x, w, H) {
   d.append(h('div', 'dk-dash', { top: '152px', width: w - 34 + 'px' }));
   const pill = (y, kids, cls = '') => d.append(h('div', 'dk-dp ' + cls, { top: y + 'px' }, kids));
   d.append(kv(176, 16, 'Clipboard check / task|Light', 'Ticket type', '')); pill(169, ['Contact Ticket', I('Down|Light')]);
-  d.append(kv(226, 16, 'Name / ID Card|Light', 'Contacts', '')); pill(219, [h('div', 'pav', { backgroundImage: img('jonas') }), 'Jonas Muller', I('Close|Light')], 'gray');
+  d.append(kv(226, 16, 'Name / ID Card|Light', 'Contacts', '')); pill(219, [h('div', 'pav', { backgroundImage: img('jonas') }), 'Jonas Miller', I('Close|Light')], 'gray');
   d.append(h('div', 'dk-dash', { top: '274px', width: w - 34 + 'px' }));
   d.append(kv(298, 16, svg(PRIO, 'width:20px;height:20px;color:#444658'), 'Priority', '')); pill(291, [h('span', 'dk-bang', null, '!!!'), 'High', I('Down|Light')], 'red');
   d.append(kv(348, 16, 'Status|Light', 'Status', '')); pill(341, [P('position:relative;width:9px;height:9px;border-radius:50%;background:#4B8A1E'), 'Active', I('Down|Light')]);
@@ -404,15 +404,15 @@ function menuCol(x, H, active) {
 const TEAM = [
   { av: 'jesse', name: 'Jesse Di Lucca', admin: true, ph: '+1 (971) 567-1234', d: '101 · Sales · Support', st: '#3F8A12' },
   { av: 'alexis', name: 'Alexis Johnson', ph: '+1 (971) 567-9352', d: '102 · Billing', st: '#C0392B' },
-  { av: 'judith', name: 'Alice Grossman', ph: '+1 (202) 555-0832', d: '103 · After Hours', st: '#3F8A12' },
-  { av: 'quincey', name: 'Quincey Hart', ph: '+1 (202) 555-0199', d: '104 · Orders · After Hours', st: '#74768A' },
-  { av: 'kevin', name: 'Kevin Lui', ph: '+1 (202) 555-0456', d: '105 · Sales · Support', st: '#C0392B' },
+  { av: 'sandy', name: 'Sandy Grossman', ph: '+1 (202) 555-0832', d: '103 · After Hours', st: '#3F8A12' },
+  { av: 'metickets', name: 'Quincy Hayes', ph: '+1 (202) 555-0199', d: '104 · Orders · After Hours', st: '#74768A' },
+  { av: 'liamj', name: 'Andre Collins', ph: '+1 (202) 555-0456', d: '105 · Sales · Support', st: '#C0392B' },
   { av: 'priya', name: 'Natasha Murphy', ph: '+1 (202) 555-0311', d: '106 · Support', st: '#3F8A12' },
-  { av: 'ravi', name: 'Ravi Chandran', ph: '+1 (202) 555-0377', d: '107 · Orders', st: '#3F8A12' },
+  { av: 'raju', name: 'Krishna Patel', ph: '+1 (202) 555-0377', d: '107 · Orders', st: '#3F8A12' },
   { av: 'marcus', name: 'Marcus Reed', ph: '+1 (202) 555-0418', d: '108 · Sales', st: '#74768A' },
 ];
 function teamPane(x, w, H, sel, asCol) {
-  const p = asCol ? col(x, w, H) : pane(x, w, H);
+  const p = asCol ? col(x, w, H) : pane(x, w, H); p.dataset.team = '';
   p.append(I('Close|Light', 'position:absolute;left:16px;top:20px'), P('left:52px;top:16px;font:800 24px/32px var(--sf)', 'Team Members'), I('Add|Light', `position:absolute;left:${w - 42}px;top:20px;width:26px;height:26px`));
   p.append(h('div', 'ds-field', { left: '16px', top: '64px', width: w - 32 + 'px' }, [I('Search|Light'), 'Search team members']));
   p.append(P('left:16px;top:116px;display:flex;gap:8px;white-space:nowrap', ['Sales', 'Orders', 'Support', 'After Hours', 'Billing'].map(t => h('div', 'dk-chip', 'height:36px', t))));
@@ -494,7 +494,7 @@ function transferDialog(W, H) {
     P(`left:242px;top:32px;width:56px;height:56px;border-radius:16px;background:${img('alexis')} center/cover;box-shadow:0 0 0 2px #EEF0FA`),
     icon('Call Transfer|Bold', 'position:absolute;left:200px;top:45px;width:30px;height:30px;color:#3F7D1C'),
     P('left:286px;top:76px;width:16px;height:16px;border-radius:50%;background:#3F8A12;border:3px solid #fff'),
-    P('left:0;right:0;top:122px;text-align:center;font:700 21px/28px var(--sf)', 'Transfer to Sarah'),
+    P('left:0;right:0;top:122px;text-align:center;font:700 21px/28px var(--sf)', 'Transfer to Alexis'),
     P('left:0;right:0;top:154px;text-align:center;font:400 15px/20px var(--sf);color:#444658', 'Keisha Morgan · Billing'),
     P('left:20px;top:202px;width:189px;height:52px;border-radius:15px;background:#DFE1F8;color:#B23220;display:grid;place-items:center;font:400 17px/1 var(--sf)', 'Cancel'),
     P('left:221px;top:202px;width:189px;height:52px;border-radius:15px;background:#3356FF;color:#fff;display:grid;place-items:center;font:400 17px/1 var(--sf)', 'Transfer Now')]);
@@ -595,16 +595,16 @@ function menuPanel(w, hh, active, numGap = 0) {
 }
 /* team list (real pattern: "phone:" line + extension) */
 const TEAM4 = [
-  { av: 'jesse', name: 'Jesse Di Lucca (You)', admin: true, ph: '+1 (971) 567-1234', ext: '100', st: '#3F8A12' },
+  { av: 'bob', name: 'Bob Hart (You)', admin: true, ph: '+1 (971) 567-1234', ext: '100', st: '#3F8A12' },
   { lisa: true, name: 'Lisa (AI Agent)', st: '#3F8A12' },
   { av: 'alexis', name: 'Alexis Johnson', ph: '+1 (971) 567-9352', ext: '101', st: '#3F8A12' },
-  { av: 'kevin', name: 'Kevin Lui', ph: '+1 (202) 555-0456', ext: '102', st: '#3F8A12' },
-  { av: 'judith', name: 'Alice Grossman', ph: '+1 (202) 555-0832', ext: '103', st: '#C0392B' },
-  { av: 'quincey', name: 'Quincey Hart', ph: '+1 (202) 555-0199', ext: '104', st: '#74768A' },
+  { av: 'liamj', name: 'Andre Collins', ph: '+1 (202) 555-0456', ext: '102', st: '#3F8A12' },
+  { av: 'sandy', name: 'Sandy Grossman', ph: '+1 (202) 555-0832', ext: '103', st: '#C0392B' },
+  { av: 'metickets', name: 'Quincy Hayes', ph: '+1 (202) 555-0199', ext: '104', st: '#74768A' },
   { av: 'priya', name: 'Natasha Murphy', ph: '+1 (202) 555-0311', ext: '105', st: '#3F8A12' },
 ];
 function teamList(w, hh, { sel = -1, ringing = [] } = {}) {
-  const p = h('div', '', `position:absolute;left:0;top:0;width:${w}px;height:${hh}px;background:#fff;overflow:hidden`);
+  const p = h('div', '', `position:absolute;left:0;top:0;width:${w}px;height:${hh}px;background:#fff;overflow:hidden`); p.dataset.team = '';
   p.append(P('left:18px;top:15px;font:700 22px/32px var(--sf)', 'Team Members'), I('Add|Light', `position:absolute;left:${w - 44}px;top:19px;width:26px;height:26px`));
   p.append(h('div', 'ds-field', { left: '16px', top: '62px', width: w - 32 + 'px', height: '44px', borderRadius: '12px' }, [I('Search|Light'), 'Search team members']));
   TEAM4.forEach((r, i) => {
@@ -672,7 +672,7 @@ DS.v4calls = ({ W, H, key = 'michael', live, transfer }) => {
   const el = root(W, H, 'Calls');
   el.append(summaryPane(432, W - 432, H, key), callsCol(72, H, key));
   if (live) { const lw = liveWidget(88, H - 235); el.append(lw);
-    if (transfer) { lw.querySelector('.tm').before(h('div', '', 'position:absolute;left:87px;top:98px;font:500 15px/22px var(--sf);color:#7BD23A', 'Transferring to Sarah…')); lw.querySelector('.tm').style.top = '124px'; lw.querySelector('.nm').style.top = '68px'; } }
+    if (transfer) { lw.querySelector('.tm').before(h('div', '', 'position:absolute;left:87px;top:98px;font:500 15px/22px var(--sf);color:#7BD23A', 'Transferring to Alexis…')); lw.querySelector('.tm').style.top = '124px'; lw.querySelector('.nm').style.top = '68px'; } }
   return { el };
 };
 DS.menuOverlay = ({ W, H, base = 'inbox', left, right, lw = 380, rw = 500 }) => {

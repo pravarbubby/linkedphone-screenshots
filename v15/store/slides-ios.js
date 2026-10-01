@@ -73,7 +73,7 @@ slides[7] = { title: 'One Number. One Team.', build() {
   const e = slide('ios');
   head(e, 'One Number. One Team.', [['bb', 'Share calls'], ', texts, & customer requests.']);
   e.append(phone(MS.team().el, { x: PX, y: PY, s: S }));
-  e.append(pop(MS.incomingTeam(), { x: 48, y: 1682, w: 483, h: 128, k: 2.457, r: 40 }));
+  e.append(pop(MS.incomingTeam(), { x: 48, y: 1682, w: 483, h: 128, k: 2.457, r: 40, cls: 'halo' }));
   return e;
 } };
 

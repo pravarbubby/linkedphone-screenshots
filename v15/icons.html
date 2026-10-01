@@ -1,5 +1,5 @@
 <!doctype html><meta charset="utf-8"><style>body{margin:0;font:9px sans-serif;display:grid;grid-template-columns:repeat(16,120px);gap:2px}div{height:62px;text-align:center;overflow:hidden}svg{width:30px;height:30px;display:block;margin:4px auto}</style>
-<script src="kit/icons.js"></script><script src="kit/tab-icons.js?v=15"></script><body><script>
+<script src="kit/icons.js"></script><script src="kit/tab-icons.js?v=15d"></script><body><script>
 const want=new URLSearchParams(location.search).get('f')||'';
 for(const [k,v] of Object.entries(ICONS)){ if(want && !new RegExp(want,'i').test(k)) continue; const d=document.createElement('div'); d.innerHTML=v+k; document.body.append(d);}
 </script>

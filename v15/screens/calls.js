@@ -117,8 +117,8 @@ const place = (e, cls) => { e.classList.add(cls); return e; };
 const ROWS = [
   { tile: 'call_answered', name: 'Noah Anderson', rec: true, sub: 'Lisa answered · 9:20 am' },
   { tile: 'call_missed_ah', name: 'Ivy Turner', wa: true, vm: true, moon: true, sub: 'No-one answered · 9:14 am' },
-  { tile: 'call_dialed', name: 'Jonas Muller', sub: 'Sandy dialed · 8:52 am' },
-  { tile: 'call_transfer', name: 'Keisha Morgan', sub: 'Sandy → Alberto · 8:47 am' },
+  { tile: 'call_dialed', name: 'Jonas Miller', sub: 'Sandy dialed · 8:52 am' },
+  { tile: 'call_transfer', name: 'Keisha Morgan', sub: 'Sandy → Andre · 8:47 am' },
   { tile: 'call_hungup', name: 'Barry Hill', sub: 'Caller hung up · 8:31 am' },
   { tile: 'call_missed', name: 'Ravi Chandran', sub: 'No-one answered · 8:15 am' },
   { tile: 'call_failed_ah', name: 'Kevin Lui', moon: true, sub: 'Sandy dialed · Failed · 7:58 am' },
@@ -137,7 +137,7 @@ SCREENS.calls = () => {
   const content = h('div', 'cl-list');
   const rows = ROWS.map(r => { const e = callRow(r); content.append(e); return e; });
   el.append(content);
-  const hdr = header('Calls', 'raju', ['Missed', 'My calls', 'Voicemails']);
+  const hdr = header('Calls', 'bob', ['Missed', 'My calls', 'Voicemails']);
   el.append(hdr, statusBar(), place(tabBar('Calls'), 'cl-tabs'));
   const scrollMax = Math.max(0, 167 + ROWS.length * 81 - (812 - 86));
   return { el, parts: { rows, hdr, content }, scrollMax,
@@ -181,7 +181,7 @@ SCREENS.transferConfirm = () => {
     h('div', 'cl-mav', { left: '122px', backgroundImage: img('alexis') }),
     h('div', 'cl-mdot', { left: '166px', top: '56px' }),
   ]);
-  const modal = h('div', 'cl-modal', null, [pill, h('div', 'cl-mt', null, 'Transfer to Sarah'), cancel, transferNow]);
+  const modal = h('div', 'cl-modal', null, [pill, h('div', 'cl-mt', null, 'Transfer to Alexis'), cancel, transferNow]);
   el.append(dim, modal);
   const set = v => { v = Math.min(1, Math.max(0, v)); modal.style.opacity = v; modal.style.transform = `scale(${0.9 + 0.1 * v})`; dim.style.opacity = v; modal.style.visibility = dim.style.visibility = v > 0 ? 'visible' : 'hidden'; };
   set(1);
@@ -250,7 +250,7 @@ SCREENS.callSummary = () => {
 /* ─────────────── Incoming call card (App Store 7) — standalone 483×128 ─────────────── */
 SCREENS.incomingCard = () => {
   const ic = icon('Ring / Call|Bold');
-  const el = h('div', 'cl-inc', null, [ic, h('div', 'l1', null, 'Incoming Call...'), h('div', 'l2', null, 'Noah Anderson'), h('div', 'l3', null, 'Ringing Sophia, Marcus, and Alexis'),
+  const el = h('div', 'cl-inc', null, [ic, h('div', 'l1', null, 'Incoming Call...'), h('div', 'l2', null, 'Noah Anderson'), h('div', 'l3', null, 'Ringing Jesse, Alexis, and Andre'),
     h('div', 'stk', null, ['sophia', 'marcus', 'alexis'].map(n => h('div', null, { backgroundImage: img(n) })))]);
   return { el, parts: { icon: ic } };
 };

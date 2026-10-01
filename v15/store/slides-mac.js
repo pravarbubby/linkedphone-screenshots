@@ -47,7 +47,7 @@ const transferDialog = () => {
     P(`left:236px;top:25px;width:48px;height:48px;border-radius:14px;background:${img('alexis')} center/cover;box-shadow:0 0 0 2px #fff`),
     icon('Call Transfer|Bold', 'position:absolute;left:202px;top:37px;width:26px;height:26px;color:#3F7D1C'),
     P('left:272px;top:61px;width:14px;height:14px;border-radius:50%;background:#3F8A12;box-shadow:0 0 0 2.5px #fff'),
-    P('left:0;right:0;top:96px;text-align:center;font:700 22px/30px var(--sf);letter-spacing:-.2px', 'Transferring call to Sarah'),
+    P('left:0;right:0;top:96px;text-align:center;font:700 22px/30px var(--sf);letter-spacing:-.2px', 'Transferring call to Alexis'),
     P('left:30px;right:30px;top:134px;text-align:center;font:400 15px/21px var(--sf);color:#444658', ['Once you tap ', h('b', null, 'color:#171A2B', 'Transfer Now'), ', your current call will end and be passed to the selected team member.']),
     P('left:16px;top:204px;width:191px;height:56px;border-radius:16px;background:#DFE1F8;color:#DE260C;display:grid;place-items:center;font:400 17px/1 var(--sf)', 'Cancel'),
     P('left:223px;top:204px;width:191px;height:56px;border-radius:16px;background:#3356FF;color:#fff;display:grid;place-items:center;font:400 17px/1 var(--sf)', 'Transfer Now')]);
@@ -147,7 +147,7 @@ M[7] = ['One Number. One Team.', (e) => {
   const lw = 420, rw = 630, hh = 720;
   const c = card2(DS.teamList(lw, hh, { sel: 2 }), lw, DS.memberPanel(rw, hh), rw, hh, 520);
   e.append(c.el);
-  e.append(popAt(MS.incomingTeam(), c.rx(rw) + 220, 360 + 128 * K / 2, 483, 128, { k: K, r: 40, dx: -483 * K / 2 }));
+  e.append(popAt(MS.incomingTeam(), c.rx(rw) + 220, 360 + 128 * K / 2, 483, 128, { k: K, r: 40, dx: -483 * K / 2, cls: 'halo' }));
 }];
 M[8] = ['Transfer Calls', (e) => {
   head(e, 'Transfer Calls', ['Pass live calls to the ', ['bb', 'right person'], '.']);

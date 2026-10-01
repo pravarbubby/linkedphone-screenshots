@@ -44,8 +44,8 @@ function row(r) {
 }
 
 const INBOX = [
-  { av: { photo: 'jesse' }, name: 'Jesse Di Lucca', when: '2:34 am', lines: ['Can we schedule a call for Friday to discuss next steps please?'], clamp: true, badge: 2 },
-  { av: { photo: 'ethan' }, name: 'Ethan Williams', when: '3:15 am', sub: ['incoming', 'Alberto answered'], lines: ['Ethan, I am so glad you called. I’d like to talk about the proposal'] },
+  { av: { photo: 'sophia' }, name: 'Sophia Bennett', when: '2:34 am', lines: ['Can we schedule a call for Friday to discuss next steps please?'], clamp: true, badge: 2 },
+  { av: { photo: 'ethan' }, name: 'Ethan Williams', when: '3:15 am', sub: ['incoming', 'Andre answered'], lines: ['Ethan, I am so glad you called. I’d like to talk about the proposal'] },
   { av: { photo: 'daniela' }, name: 'Daniela Wilson +2 more', when: '4:05 am', lines: ['I’m really excited about this project and I look forward to working with you!'], clamp: true, pr: 30 },
   { av: { photo: 'ivy' }, name: 'Ivy Turner', when: '3:15 am', sub: ['missed', 'Missed call · Voicemail', true], lines: ['“I just left an amazing review for you…'], vm: true, h: 124 },
   { av: { photo: 'michael' }, name: 'Michael Brown', when: '3:15 am', sub: ['outgoing', 'Sandy dialed'], lines: ['“Hi Michael. This is Sandy. I just wanted to follow up'] },
@@ -70,10 +70,10 @@ if (!document.getElementById('as-tk-css')) { const st = h('style'); st.id = 'as-
 const PILL = { NEW: '#3356FF', ACTIVE: '#4B8A1E', HOLD: '#5C5D71', CLOSED: '#8D8FA5' };
 const TICKETS = [
   { av: 'judith', name: 'Judith Rodriguez', title: 'Needs a copy of her latest invoice', line: 'I’ll work on this asap!', pill: 'NEW', mini: 'jesse' },
-  { av: 'jonas', name: 'Jonas Muller', title: 'Jonas called about a new project', line: 'I’ll pick up this request.', pill: 'ACTIVE', mini: 'alexis' },
-  { av: 'ethan', name: 'Barry Hill', title: 'Payment was declined', line: 'Credit card expired.', pill: 'HOLD', mini: 'ravi' },
+  { av: 'jonas', name: 'Jonas Miller', title: 'Jonas called about a new project', line: 'I’ll pick up this request.', pill: 'ACTIVE', mini: 'alexis' },
+  { av: 'mjohnson', name: 'Barry Hill', title: 'Payment was declined', line: 'Credit card expired.', pill: 'HOLD', mini: 'raju' },
   { av: 'keisha', name: 'Keisha Morgan', title: 'She needs tax documentation asap', line: 'Emailed it. All set.', pill: 'CLOSED', mini: 'jesse' },
-  { av: 'ravi', name: 'Ravi Chandran', title: 'Ravi can’t open the file we sent', line: 'Let me look into this.', mini: 'ravi' },
+  { av: 'ravi', name: 'Ravi Chandran', title: 'Ravi can’t open the file we sent', line: 'Let me look into this.', mini: 'liamj' },
   { av: 'liam', name: 'Liam Johnson', title: 'AC tune-up before the heat wave', line: 'Booked Tuesday 8am.', pill: 'NEW', mini: 'jesse' },
   { av: 'emma', name: 'Emma Brooks', title: 'Asked about weekend openings', line: 'Sent Saturday slots.', pill: 'ACTIVE', mini: 'alexis' },
 ];
@@ -98,7 +98,7 @@ const M = {};
 M.tickets = () => {
   const el = h('div', 'scr375');
   TICKETS.forEach((r, i) => el.append(ticketRow(r, 109.5 + 127 * i)));
-  el.append(wideHeader('Tickets', 'metickets'), statusBar(), tabs4('Tickets'));
+  el.append(wideHeader('Tickets', 'bob'), statusBar(), tabs4('Tickets'));
   return { el };
 };
 M._tickets = TICKETS; M._ticketRow = ticketRow;
@@ -108,7 +108,7 @@ M.inbox = () => {
   const el = h('div', 'scr375');
   const list = h('div', 'list as-list', 'top:167.5px');
   const rows = INBOX.map(r => { const e = row(r); list.append(e); return e; });
-  el.append(list, header('Inbox', 'meinbox', ['Unread', 'Team Chats', 'Archived']), statusBar(), tabs4('Inbox'));
+  el.append(list, header('Inbox', 'bob', ['Unread', 'Team Chats', 'Archived']), statusBar(), tabs4('Inbox'));
   return { el, rows };
 };
 /* the enlarged Ivy Turner card (slide 3) — its own looser layout */
@@ -132,7 +132,7 @@ M.callSummary = () => {
   const at = (e, top) => { e.style.top = top + 'px'; sum.append(e); return e; };
   const pl = (e, c) => { e.classList.add(c); return e; };
   sum.append(pl(icon('Close|Light'), 'cl-x'), h('div', 'cl-disc', { backgroundImage: 'url(assets/defaults/call_disc_in.png)' }),
-    h('div', 'cl-t', null, 'Michael called you'), h('div', 'cl-s', null, 'Ashley answered'),
+    h('div', 'cl-t', null, 'Michael called you'), h('div', 'cl-s', null, 'Alexis answered'),
     pl(svg('<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg>'), 'cl-more'), pl(icon('Call|Light'), 'cl-ph'));
   at(h('div', 'cl-dash'), 583.5);
   at(h('div', 'cl-h', null, 'Follow-up Actions'), 598.5);
@@ -193,7 +193,7 @@ M.callerIdBanner = () => {
 M.receptionist = () => {
   const s = SCREENS.setup();
   const el = s.el;
-  el.querySelector('.hdr').replaceWith(wideHeader('AI Receptionist', 'raju', { y: 82, meX: 17, titleX: 57, size: 24, icons: [273, 310, 347] }));
+  el.querySelector('.hdr').replaceWith(wideHeader('AI Receptionist', 'bob', { y: 82, meX: 17, titleX: 57, size: 24, icons: [273, 310, 347] }));
   el.querySelector('.ls-biz .emo').textContent = '🏡';
   el.querySelector('.ls-biz .nm').textContent = 'Premier Real Estate';
   el.querySelector('.ls-chatbtn')?.remove();
@@ -260,18 +260,18 @@ M.introCard = (w = 340) => {
 const TM = [
   { av: 'jesse', name: 'Jesse Di Lucca', admin: true, ph: '+1 (971) 567-1234', d: 'Sales · Support', st: '#3F8A12' },
   { av: 'alexis', name: 'Alexis Johnson', ph: '+1 (971) 567-9352', d: 'Billing', st: '#C0392B' },
-  { av: 'judith', name: 'Alice Grossman', ph: '+1 (202) 555-0832', d: 'After Hours', st: '#3F8A12' },
+  { av: 'sandy', name: 'Sandy Grossman', ph: '+1 (202) 555-0832', d: 'After Hours', st: '#3F8A12' },
   { av: 'bob', name: 'Bob Hart', ph: '+1 (971) 555-1212', d: 'Owner', st: '#3F8A12' },
-  { av: 'quincey', name: 'Quincey Hart', ph: '+1 (202) 555-0199', d: 'Orders · After Hours', st: '#74768A' },
-  { av: 'kevin', name: 'Kevin Lui', ph: '+1 (202) 555-0456', d: 'Sales · Support', st: '#C0392B' },
+  { av: 'metickets', name: 'Quincy Hayes', ph: '+1 (202) 555-0199', d: 'Orders · After Hours', st: '#74768A' },
+  { av: 'liamj', name: 'Andre Collins', ph: '+1 (202) 555-0456', d: 'Sales · Support', st: '#C0392B' },
   { av: 'priya', name: 'Natasha Murphy', ph: '+1 (202) 555-0311', d: 'Support', st: '#3F8A12' },
-  { av: 'ravi', name: 'Ravi Chandran', ph: '+1 (202) 555-0377', d: 'Orders', st: '#3F8A12' },
+  { av: 'raju', name: 'Krishna Patel', ph: '+1 (202) 555-0377', d: 'Orders', st: '#3F8A12' },
   { av: 'marcus', name: 'Marcus Reed', ph: '+1 (202) 555-0418', d: 'Sales', st: '#74768A' },
 ];
 const CHEV = '<svg viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 M.chev = (st) => svg(CHEV, st);
 M.team = (opts = {}) => {
-  const el = h('div', 'scr375');
+  const el = h('div', 'scr375'); el.dataset.team = '';
   const ring = opts.ringing || [];
   const T = (top, css, kids) => h('div', '', `position:absolute;left:76.8px;top:${top}px;white-space:nowrap;display:flex;align-items:center;gap:6px;` + css, kids);
   TM.forEach((r, i) => {
@@ -287,17 +287,17 @@ M.team = (opts = {}) => {
       row.append(h('div', '', 'position:absolute;left:258px;top:36px;height:26px;padding:0 10px 0 8px;border-radius:13px;background:#D7FDB7;box-shadow:inset 0 0 0 1px #9AD86C;display:flex;align-items:center;gap:5px;font:500 13px/1 var(--sf);color:#2E6A10', [icon('Ring / Call|Bold', 'width:15px;height:15px;color:#3F8A1F'), 'Ringing'])); }
     el.append(row);
   });
-  const chips = h('div', '', 'position:absolute;left:0;top:111px;width:375px;height:57px;background:#fff;z-index:24;display:flex;gap:6px;padding:0 16.6px;white-space:nowrap;overflow:hidden;align-items:flex-start;padding-top:0',
-    ['Sales', 'Orders', 'Support', 'After Hours', 'Billing'].map(t => h('div', 'chip', 'height:39.5px;font-size:15.3px;padding:0 14px;margin-top:-1px', t)));
+  const chips = h('div', '', 'position:absolute;left:0;top:111px;width:375px;height:57px;background:#fff;z-index:24;display:flex;gap:6px;padding:0 16.6px;white-space:nowrap;overflow:hidden;align-items:flex-start;padding-top:0;-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent 99%);mask-image:linear-gradient(90deg,#000 82%,transparent 99%)',
+    ['Sales', 'Orders', 'Support', 'After Hours', 'Billing'].map(t => h('div', 'chip', 'height:39.5px;font-size:15.3px;padding:0 14px;flex:none', t)));
   el.append(chips, h('div', 'nav', 'height:64px', [M.chev('width:26px;height:26px;transform:scaleX(-1);margin-left:-1px'), h('div', 'mid', 'font:700 19px/1 var(--sf);letter-spacing:-.2px', 'Team Members'), icon('Add|Light', 'width:26px;height:26px')]), statusBar());
   return { el };
 };
 M.incomingTeam = () => {
-  const e = SCREENS.incomingCard().el;
+  const e = SCREENS.incomingCard().el; e.dataset.team = '';
   e.style.boxShadow = 'none'; e.style.borderRadius = '0'; e.style.background = 'transparent';
   e.querySelector('.l2').textContent = '+1 (202) 555-0123';
-  e.querySelector('.l3').textContent = 'Ringing Jesse, Alexis, and Kevin';
-  e.querySelectorAll('.stk div').forEach((d, i) => d.style.backgroundImage = img(['jesse', 'alexis', 'kevin'][i]));
+  e.querySelector('.l3').textContent = 'Ringing Jesse, Alexis, and Andre';
+  e.querySelectorAll('.stk div').forEach((d, i) => d.style.backgroundImage = img(['jesse', 'alexis', 'liamj'][i]));
   return e;
 };
 
@@ -323,7 +323,7 @@ M.transferCard = () => {
     P(`left:519px;top:78px;width:166px;height:165px;border-radius:50px;background:${img('alexis')} center/cover;box-shadow:0 0 0 4px #EEF0FA`),
     icon('Call Transfer|Bold', 'position:absolute;left:400px;top:112px;width:96px;height:96px;color:#3F7D1C'),
     P('left:651px;top:210px;width:40px;height:40px;border-radius:50%;background:#3F8A12;box-shadow:0 0 0 7px #fff'),
-    P('left:0;right:0;top:352px;text-align:center;font:700 55.5px/76px var(--sf);letter-spacing:-.4px;white-space:nowrap', 'Transfer to Sarah'),
+    P('left:0;right:0;top:352px;text-align:center;font:700 55.5px/76px var(--sf);letter-spacing:-.4px;white-space:nowrap', 'Transfer to Alexis'),
     P('left:46px;top:496px;width:383px;height:144px;border-radius:40px;background:#DFE1F8;color:#B23220;display:grid;place-items:center;font:400 48px/1 var(--sf)', 'Cancel'),
     P('left:464px;top:496px;width:385px;height:144px;border-radius:40px;background:#3356FF;color:#fff;display:grid;place-items:center;font:400 48px/1 var(--sf)', 'Transfer Now'),
   ]);
@@ -337,7 +337,7 @@ M.texting = () => {
   el.append(P('left:16px;top:60px;width:303px;height:228px;border-radius:16px;background:#F0F0F0'),
     P('left:19.3px;top:63px;width:293.3px;height:155.7px;border-radius:10px;background:url(assets/photos/flowers.png) center 78%/cover'),
     P('left:24px;top:226px;font:400 17px/24px var(--sf);letter-spacing:-.3px;white-space:nowrap', 'What’s the status on my order?'),
-    P('left:24px;top:256px;font:400 15px/22px var(--sf);letter-spacing:-.2px;color:#444658;white-space:nowrap', 'Richard · 8:30 pm'));
+    P('left:24px;top:256px;font:400 15px/22px var(--sf);letter-spacing:-.2px;color:#444658;white-space:nowrap', 'Kevin · 8:30 pm'));
   el.append(P('left:0;top:111px;width:375px;height:10px;background:#fff;z-index:20'),
     P('left:141px;top:130.7px;height:23px;padding:0 9px;border-radius:9px;background:#EFF0FE;border:1px solid #E3E5FA;box-shadow:0 2px 6px rgba(23,26,43,.08);font:400 15px/21px var(--sf);white-space:nowrap;z-index:5', 'Oct 1, 2026'));
   // keyboard (no predictive bar, as in the store shot) under the composer

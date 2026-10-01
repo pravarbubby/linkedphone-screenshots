@@ -70,7 +70,7 @@ function callScreen({ dark = true, callerId = false, who = 'noah', name = 'Noah 
 
 /* ── call summary card (pop) in pt ── */
 function summaryCardPt(w) {
-  const B = ['Michael called to book a haircut and beard trim.', 'Requested Jessica, his usual stylist.', 'Looking for an appointment this Saturday morning.', 'Prefers a time between 10:00 AM and noon.', 'Confirmed for Saturday at 11:30 AM.'];
+  const B = ['Michael called to book a haircut and beard trim.', 'Requested Jessica, his usual barber.', 'Looking for an appointment this Saturday morning.', 'Prefers a time between 10:00 AM and noon.', 'Confirmed for Saturday at 11:30 AM.'];
   return P(`left:0;top:0;width:${w}px;height:240px;background:#fff`, [
     P('left:22px;top:22px;font:700 17px/24px var(--sf)', 'Call Summary'),
     P('right:22px;top:24px;font:600 13.5px/20px var(--sf);background:linear-gradient(90deg,#5E6BE8,#B04FD0);-webkit-background-clip:text;background-clip:text;color:transparent', 'LinkedPhone AI'),
@@ -124,7 +124,7 @@ L[7] = ['One Number. One Team.', (e) => {
   ic.firstChild.style.cssText += ';left:20px;top:28px;width:52px;height:52px';
   q('.l1').style.cssText += ';left:88px;top:12px;font-size:19px'; q('.l2').style.cssText += ';left:88px;top:40px;font-size:16.5px'; q('.l3').style.cssText += ';left:88px;top:64px;font-size:16.5px';
   q('.stk').style.cssText += `;left:${W - 20 - 33 * 3 + 14}px;top:39px`;
-  e.append(pop(ic, { x: sx(W / 2) - W * K / 2, y: sy(Y2, 300), w: W, h: hh, k: K, r: 22 }));
+  e.append(pop(ic, { x: sx(W / 2) - W * K / 2, y: sy(Y2, 300), w: W, h: hh, k: K, r: 22, cls: 'halo' }));
 }];
 L[8] = ['Transfer Calls', (e) => {
   head(e, 'Transfer Calls', ['Pass live calls to the ', ['bb', 'right person'], '.']);

@@ -197,13 +197,13 @@ SCREENS.chat = () => {
 
 /* ---------------------------------------------------------------- tickets */
 const TK = [
-  { n: '#256', name: 'Judith Rodriguez', p: 3, when: '9:20 am', av: { photo: 'judith' }, s: 'Needs a copy of her latest invoice', l: 'I’ll work on this asap and send it before Friday.', st: 'new', own: 'ethan' },
-  { n: '#255', name: 'Jonas Muller', p: 2, when: '9:12 am', av: { photo: 'jonas' }, s: 'Jonas called about a new project', l: 'I’ll pick up this request and call him back today.', st: 'active', own: 'daniela' },
-  { n: '#253', name: 'Internal Task', p: 2, when: '9:05 am', av: { kind: 'internal' }, s: 'Prepare the spring tune-up estimate for Premier Real Estate', l: 'Waiting on the parts list from the HVAC team.', cnt: 2, own: 'sophia' },
-  { n: '#249', name: 'Barry Hill', p: 3, when: '8:50 am', av: { initials: 'BH' }, s: 'Payment was declined', l: 'Credit card expired. Asked him to update it.', st: 'hold', own: 'michael' },
+  { n: '#256', name: 'Judith Rodriguez', p: 3, when: '9:20 am', av: { photo: 'judith' }, s: 'Needs a copy of her latest invoice', l: 'I’ll work on this asap and send it before Friday.', st: 'new', own: 'jesse' },
+  { n: '#255', name: 'Jonas Miller', p: 2, when: '9:12 am', av: { photo: 'jonas' }, s: 'Jonas called about a new project', l: 'I’ll pick up this request and call him back today.', st: 'active', own: 'alexis' },
+  { n: '#253', name: 'Internal Task', p: 2, when: '9:05 am', av: { kind: 'internal' }, s: 'Prepare the spring tune-up estimate for Premier Real Estate', l: 'Waiting on the parts list from the HVAC team.', cnt: 2, own: 'sandy' },
+  { n: '#249', name: 'Barry Hill', p: 3, when: '8:50 am', av: { initials: 'BH' }, s: 'Payment was declined', l: 'Credit card expired. Asked him to update it.', st: 'hold', own: 'raju' },
   { n: '#247', name: 'Keisha Morgan', when: '8:40 am', av: { photo: 'keisha' }, s: 'She needs tax documentation asap', l: 'Emailed it. All set.', st: 'closed', own: 'jesse' },
   { n: '#245', name: 'Internal Task', p: 2, when: '8:25 am', av: { kind: 'internal' }, s: 'Reply to Ivy Turner’s 5-star review on Google', l: 'Draft a thank-you note and share it with the team.', own: 'alexis' },
-  { n: '#241', name: 'Ravi Chandran', when: '8:10 am', av: { photo: 'ravi' }, s: 'Ravi can’t open the file we sent', l: 'Let me look into this and resend it as a PDF.', own: 'ivy' },
+  { n: '#241', name: 'Ravi Chandran', when: '8:10 am', av: { photo: 'ravi' }, s: 'Ravi can’t open the file we sent', l: 'Let me look into this and resend it as a PDF.', own: 'liamj' },
 ];
 // status glyphs as designed: filled white disc with the pill colour knocked out
 const DISC = (inner) => `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.6" fill="#fff"/>${inner}</svg>`;
@@ -231,7 +231,7 @@ SCREENS.tickets = () => {
   const content = h('div', 'ms-tl');
   const rows = TK.map(r => { const e = tRow(r); content.append(e); return e; });
   el.append(content);
-  const hdr = header('Tickets', 'raju', ['Sort', 'My Tasks', 'Priority', 'Status']);
+  const hdr = header('Tickets', 'bob', ['Sort', 'My Tasks', 'Priority', 'Status']);
   el.append(hdr, statusBar(), tabBar('Tickets'));
   const max = () => Math.max(0, content.scrollHeight + 166 - (812 - 86));
   return { el, parts: { content, rows, hdr }, scrollMax: max, scroll(y) { content.style.transform = `translateY(${-Math.max(0, Math.min(max(), y))}px)`; } };
@@ -248,7 +248,7 @@ SCREENS.ticketChat = () => {
     h('i', null, 'width:90%'), h('i', null, 'width:70%'), h('i', null, 'width:82%'), h('i', null, 'width:60%'), h('i', null, 'width:88%'),
     h('div', 'tot', null, [h('span', null, null, 'Total due'), h('span', null, null, '$1,250.00')]), h('i', null, 'width:50%;margin-top:10px'), h('i', null, 'width:74%')]));
   const b1 = h('div', 'ms-pk', null, [inv, h('div', 'ms-txt', null, 'Here’s the invoice from August. She needs the latest one.'),
-    h('div', 'ms-meta', null, [mav('sophia'), 'Sophia Turner · 8:30 pm'])]);
+    h('div', 'ms-meta', null, [mav('sophia'), 'Sophia Bennett · 8:30 pm'])]);
   const system = h('div', 'ms-sys', null, [h('div', 'a', null, ['Priority changed to ', h('b', null, null, '!!! High')]), h('div', 'm', null, 'Ethan Williams · 8:30 pm')]);
   const b2 = h('div', 'ms-pk', null, [h('div', 'ms-txt', 'padding-top:6px', 'Judith called again this morning. She needs a copy of her latest invoice before Friday for her accountant. Can someone in billing pull it from QuickBooks and email it to her directly today?'),
     h('div', 'ms-meta', null, [mav('ethan'), 'Ethan Williams · 8:30 pm'])]);

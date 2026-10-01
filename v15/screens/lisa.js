@@ -279,7 +279,7 @@ SCREENS.setup = () => {
   sc.append(at('ls-glow'), hero, chat, bizCard, bh, ch, at('ls-conn'), ...rows, at('ls-hr', 'top:904px'), knowledge,
     at('ls-hr', 'top:1176px'), at('ls-perf', null, 'Lisa’s Performance'), at('ls-week', null, ['This week', icon('Down|Light')]),
     ...stats, at('ls-hr', 'top:1510px'), reset);
-  const hdr = header('Setup', 'raju');
+  const hdr = header('Setup', 'bob');
   el.append(sc, hdr, statusBar(), tabBar('Setup'));
 
   const scrollMax = PAGE - 812;

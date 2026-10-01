@@ -20,7 +20,7 @@ function rail(active) {
     .forEach(([k, l, b], i) => r.append(h('div', 'dk-ri' + (k === active ? ' on' : ''), { top: 80 + 48 * i + 'px' }, I(k === active ? b : l))));
   r.append(h('div', 'dk-sep', 'top:693px'));
   ['Support|Light', 'Star / AI 3|Light', 'Flow|Light'].forEach((n, i) => r.append(h('div', 'dk-ri', { top: 709 + 48 * i + 'px' }, I(n))));
-  r.append(h('div', 'dk-me', { backgroundImage: img('raju') }));
+  r.append(h('div', 'dk-me', { backgroundImage: img('bob') }));
   return r;
 }
 
@@ -35,12 +35,12 @@ function listHead(col, title, chips, first) {
 
 /* ---------------- Inbox ---------------- */
 const IROWS = [
-  { av: { photo: 'jesse' }, name: 'Jesse Di Lucca', when: '2:34 am', lines: ['Can we schedule a call for Friday to discuss next steps please?'], c2: true, badge: 2 },
+  { av: { photo: 'sophia' }, name: 'Sophia Bennett', when: '2:34 am', lines: ['Can we schedule a call for Friday to discuss next steps please?'], c2: true, badge: 2 },
   { av: { def: 'initials_mb' }, name: 'Michael Brown', bang: true, when: '3:15 am', sub: ['Outgoing Call|Bold', 'Sandy dialed'], lines: ['“Hi Michael, this is Sandy with an update on your order…”'], sel: true },
   { av: { def: 'unknown' }, name: 'keisha.morgan@gmail.com', when: '3:01 am', lines: ['Tax documents for my 2025 return', 'Hi! Attaching my W-2 and 1099 forms for you…'], badge: 1 },
   { av: { def: 'group' }, name: 'Daniela Wilson +2 more', when: '4:05 am', lines: ['I’m really excited about this project and I look forward to working with you!'], c2: true },
-  { av: { def: 'initials_ew' }, name: 'Ethan Williams', when: '3:15 am', sub: ['Incoming Call|Bold', 'Alberto answered · Sales'], lines: ['“Ethan, I am so glad you called. I’d like to…”'], tag: 'Response due today' },
-  { av: { photo: 'sophia' }, name: 'Sophia Turner', when: '3:15 am', sub: ['Missed Call|Bold', 'Missed · Sales', true], lines: ['“I just left an amazing review for you…”'], vm: true },
+  { av: { def: 'initials_ew' }, name: 'Ethan Williams', when: '3:15 am', sub: ['Incoming Call|Bold', 'Andre answered · Sales'], lines: ['“Ethan, I am so glad you called. I’d like to…”'], tag: 'Response due today' },
+  { av: { photo: 'ivy' }, name: 'Ivy Turner', when: '3:15 am', sub: ['Missed Call|Bold', 'Missed · Sales', true], lines: ['“I just left an amazing review for you…”'], vm: true },
   { av: { def: 'campaign' }, name: 'Spring Tune-Up Special', when: '3:15 am', lines: ['Book your AC tune-up before May 31 and save 20% on parts & labor.'], c2: true },
   { av: { photo: 'judith' }, name: 'Judith Rodriguez', when: '2:50 am', sub: ['Photo / Media|Bold', '3 Photos'], lines: [], badge: 3 },
 ];
@@ -106,7 +106,7 @@ function convPane(details) {
   ]);
   const out = h('div', 'dk-out', { marginTop: '24px', width: (details ? 563 : 728) + 'px' }, [
     h('div', 'dk-txt', 'min-height:66px', TXT_OUT),
-    h('div', 'dk-meta', 'margin-top:11px', [h('div', 'mav', { backgroundImage: img('raju') }), 'Sandy · 8:30 pm']),
+    h('div', 'dk-meta', 'margin-top:11px', [h('div', 'mav', { backgroundImage: img('sandy') }), 'Sandy · 8:30 pm']),
     I('Double checkmark|Light', 'position:absolute;right:12px;bottom:15px;width:20px;height:20px;color:#5C5D71'),
   ]);
   const messages = [m1, tcard, date, ccard, out];
@@ -187,13 +187,13 @@ SCREENS.deskInbox = (variant) => {
 /* ---------------- Calls ---------------- */
 const CROWS = [
   { t: 'call_missed_ah', name: 'Keisha Morgan', wa: true, vm: true, sub: 'No-one answered · 9:20 am' },
-  { t: 'call_dialed', name: 'Sophia Turner', rec: true, sub: 'Krishna dialed · 9:14 am' },
-  { t: 'call_answered', name: 'Michael Brown', wa: true, rec: true, sub: 'Ashley answered · 9:05 am', sel: true },
-  { t: 'call_transfer', name: 'Ravi Chandran', rec: true, sub: 'Krishna → Alberto · 8:52 am' },
-  { t: 'call_hungup', name: 'Jonas Muller', sub: 'Caller hung up · 8:41 am' },
+  { t: 'call_dialed', name: 'Sophia Bennett', rec: true, sub: 'Krishna dialed · 9:14 am' },
+  { t: 'call_answered', name: 'Michael Brown', wa: true, rec: true, sub: 'Alexis answered · 9:05 am', sel: true },
+  { t: 'call_transfer', name: 'Ravi Chandran', rec: true, sub: 'Krishna → Andre · 8:52 am' },
+  { t: 'call_hungup', name: 'Jonas Miller', sub: 'Caller hung up · 8:41 am' },
   { t: 'call_missed', name: 'Liam Johnson', sub: 'No-one answered · 8:29 am' },
   { t: 'call_failed_ah', name: 'Noah Anderson', sub: 'Krishna dialed · Failed · 8:17 am' },
-  { t: 'call_dialed', name: 'Emma Brooks', rec: true, sub: 'Alberto dialed · 8:05 am' },
+  { t: 'call_dialed', name: 'Emma Brooks', rec: true, sub: 'Andre dialed · 8:05 am' },
   { t: 'call_answered', name: 'Judith Rodriguez', rec: true, sub: 'Krishna answered · 7:58 am' },
   { t: 'call_missed_ah', name: 'Priya Shah', wa: true, vm: true, sub: 'No-one answered · 7:46 am' },
 ];
@@ -221,7 +221,7 @@ SCREENS.deskCalls = (variant) => {
   const hdr = h('div', 'dk-chdr', null, [
     h('div', 'dk-cav', { backgroundImage: DEF('call_disc_in'), backgroundSize: 'cover' }),
     h('div', 't1', null, 'Michael called you'),
-    h('div', 't2', null, ['Ashley answered']),
+    h('div', 't2', null, ['Alexis answered']),
     h('div', null, 'position:absolute;right:16px;top:26px;display:flex;gap:16px', [I('Menu|Light'), I('Chat 2|Light'), I('Call|Light')]),
     h('div', 'dk-ctabs', 'left:114px;width:768px', [h('div', 'on'), h('span', null, 'left:0', 'AI Summary'), h('span', null, 'left:50%', 'Transcript')]),
   ]);
@@ -231,7 +231,7 @@ SCREENS.deskCalls = (variant) => {
     h('div', 'dk-fc', null, [emo('☀️'), 'Start']), arrow(),
     h('div', 'dk-fc', null, [h('div', 'num', null, '2'), 'Bookings']), arrow(),
     h('div', 'dk-fc', null, [h('div', 'num', null, '3'), 'Hair & Beard']), arrow(),
-    h('div', 'dk-fc', null, [h('div', 'fav', { backgroundImage: img('alexis') }), 'Ashley answered · 2:34']), arrow(),
+    h('div', 'dk-fc', null, [h('div', 'fav', { backgroundImage: img('alexis') }), 'Alexis answered · 2:34']), arrow(),
     h('div', 'dk-fc', 'padding:0 12px', 'End'),
   ]);
   S.append(flow);

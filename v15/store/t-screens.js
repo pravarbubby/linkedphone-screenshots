@@ -75,7 +75,7 @@ TS.callSummary = (W, H) => {
   const ARR = '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"/></svg>';
   const arrow = () => h('div', 'cl-fa', null, svg(ARR, 'width:14px;height:14px'));
   sum.append(h('div', 'cl-flow', null, [h('div', 'cl-fc', null, [h('span', null, 'font-size:15px', '☀️'), 'Start']), arrow(),
-    h('div', 'cl-fc', null, [h('div', null, { width: '20px', height: '20px', borderRadius: '50%', background: img('alexis') + ' center/cover' }), 'Ashley answered · 2:34']), arrow(), h('div', 'cl-fc', 'padding:0 11px', 'End')]));
+    h('div', 'cl-fc', null, [h('div', null, { width: '20px', height: '20px', borderRadius: '50%', background: img('alexis') + ' center/cover' }), 'Alexis answered · 2:34']), arrow(), h('div', 'cl-fc', 'padding:0 11px', 'End')]));
   at(h('div', 'cl-dash'), 320);
   at(h('div', 'cl-h', null, 'Summary'), 337);
   ['Michael called to book a haircut and beard trim.', 'Looking for an appointment this Saturday morning.', 'Confirmed for Saturday at 11:30.'].forEach((t, i) => at(h('div', 'cl-bul', null, t), 371.5 + 34 * i));
@@ -110,14 +110,14 @@ TS.texting = (W, H) => {
     h('div', '', 'font:400 17px/24px var(--sf);letter-spacing:-.2px', t),
     h('div', '', 'margin-top:6px;display:flex;align-items:center;gap:7px;font:400 14.5px/20px var(--sf);color:#5C5D71', [h('div', '', `width:18px;height:18px;border-radius:50%;background:${img(who)} center/cover`), meta])]);
   col.append(
-    inB('Hi! Do you deliver to Brooklyn Heights? I’d love a few potted arrangements for my shop.', 'Richard · 4:12 pm'),
+    inB('Hi! Do you deliver to Brooklyn Heights? I’d love a few potted arrangements for my shop.', 'Kevin · 4:12 pm'),
     outB('Yes! We deliver across Brooklyn every day. Send us a photo of what you like and we’ll get it ready.', 'Jesse · 4:20 pm', 'jesse'),
     pill('Oct 1, 2026'),
     h('div', '', `align-self:flex-end;max-width:${MW}px;border-radius:16px;background:#DFE1F8;padding:10px`, [h('div', '', 'background:#fff;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;width:300px', [
       h('div', '', 'width:38px;height:38px;border-radius:10px;background:#EFF0FE;display:grid;place-items:center', icon('File / Document|Light', 'width:21px;height:21px')),
       h('div', null, null, [h('div', '', 'font:500 16px/21px var(--sf)', 'Order_2041_Receipt.pdf'), h('div', '', 'font:400 13.5px/18px var(--sf);color:#5C5D71', '184 KB · pdf')])]),
       h('div', '', 'margin-top:6px;display:flex;align-items:center;gap:7px;font:400 14.5px/20px var(--sf);color:#5C5D71', [h('div', '', `width:18px;height:18px;border-radius:50%;background:${img('jesse')} center/cover`), 'Jesse · 9:02 am'])]),
-    inB('Thank you! What’s the status on my order?', 'Richard · 8:30 pm'));
+    inB('Thank you! What’s the status on my order?', 'Kevin · 8:30 pm'));
   el.append(col);
   const comp = h('div', '', `position:absolute;left:0;top:${H - 96}px;width:${W}px;height:96px;background:#fff`, [
     svg('<svg viewBox="0 0 24 24"><path d="M12 4.5v15M4.5 12h15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>', 'position:absolute;left:20px;top:36px;width:26px;height:26px'),

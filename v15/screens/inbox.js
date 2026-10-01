@@ -6,7 +6,7 @@ const ROWS = [
   { av: { photo: 'michael' }, name: 'Michael Brown', when: '3:15 am', sub: ['outgoing', 'Sandy dialed'], lines: ['“Hi Michael, this is Sandy with the quote you…”'] },
   { av: { kind: 'group' }, name: 'Daniela Wilson +2 more', when: '4:05 am', lines: ['I’m really excited about this project and I look forward to working with you!'], clamp: true },
   { av: { kind: 'unknown' }, name: 'keisha.morgan@gmail.com', when: '3:01 am', bold: 'Tax documents for my 2025 return', lines: ['Hi! Attaching my W-2 and 1099 forms for…'], badge: 1, tag: 'Needs First Response' },
-  { av: { photo: 'ethan' }, name: 'Ethan Williams', when: '3:15 am', sub: ['incoming', 'Alberto answered · Sales'], lines: ['“Ethan, I am so glad you called. I’d like to…”'] },
+  { av: { photo: 'ethan' }, name: 'Ethan Williams', when: '3:15 am', sub: ['incoming', 'Andre answered · Sales'], lines: ['“Ethan, I am so glad you called. I’d like to…”'] },
   { av: { photo: 'ivy' }, name: 'Ivy Turner', when: '3:15 am', sub: ['missed', 'Missed · Voicemail', true], lines: ['“I just left an amazing review for you…”'], italic: true, vm: true },
   { av: { kind: 'campaign' }, name: 'Spring Tune-Up Special', when: '3:15 am', lines: ['Book your AC tune-up before May 31 and save 20% on parts & labor.'], clamp: true, italic: true },
   { av: { kind: 'unknown' }, name: '+1 (512) 555-0187', when: '3:45 am', lines: ['Hi! Do you have any openings this Saturday for a deep clean?'], clamp: true, italic: true, badge: 2 },
@@ -36,7 +36,7 @@ SCREENS.inbox = () => {
   const content = h('div', 'list', 'top:163px');
   const rows = ROWS.map(r => { const e = row(r); content.append(e); return e; });
   el.append(content);
-  const hdr = header('Inbox', 'raju', ['Unread', 'Response Due', 'Team Chats']);
+  const hdr = header('Inbox', 'bob', ['Unread', 'Response Due', 'Team Chats']);
   el.append(hdr, statusBar(), tabBar('Inbox'));
   return { el, parts: { content, rows, hdr }, scrollMax: () => Math.max(0, content.scrollHeight + 163 - (812 - 86)) };
 };
