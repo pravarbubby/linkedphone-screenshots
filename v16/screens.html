@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Screen Replicas</title>
+<link rel="stylesheet" href="kit/ui.css"><link rel="stylesheet" href="kit/desktop.css">
+<style>
+  body { margin: 0; background: #0d0e14; color: #d9dcf2; font: 13px/1.4 -apple-system, system-ui; }
+  main { display: flex; flex-wrap: wrap; gap: 28px; padding: 24px; }
+  .item { display: flex; flex-direction: column; gap: 6px; }
+  .frame { position: relative; overflow: hidden; border-radius: 14px; background: #fff; }
+  .frame > .inner { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+  .cap b { color: #fff; }
+</style></head>
+<body><main id="m"></main>
+<script src="kit/icons.js"></script><script src="kit/tab-icons.js?v=16a"></script><script src="kit/ui.js"></script>
+<script>window.SCREENS = window.SCREENS || {};</script>
+<script src="screens/inbox.js"></script><script src="screens/onboarding.js"></script><script src="screens/calls.js"></script>
+<script src="screens/lisa.js"></script><script src="screens/messaging.js"></script><script src="screens/desktop.js"></script><script src="screens/profile.js"></script>
+<script>
+const m = document.getElementById('m');
+const only = new URLSearchParams(location.search).get('k');
+Object.keys(SCREENS).filter(k => !only || only.split(',').includes(k)).forEach(k => {
+  let s; try { s = SCREENS[k](); } catch (e) { m.append(k + ': ' + e.message); return; }
+  const desk = /^desk/.test(k), W = desk ? 1428 : 375, H = desk ? 901 : 812, sc = desk ? .5 : .62;
+  const it = document.createElement('div'); it.className = 'item';
+  const f = document.createElement('div'); f.className = 'frame'; f.style.width = W * sc + 'px'; f.style.height = H * sc + 'px';
+  const inner = document.createElement('div'); inner.className = 'inner'; inner.style.cssText = `width:${W}px;height:${H}px;transform:scale(${sc})`;
+  inner.append(s.el); f.append(inner);
+  const cap = document.createElement('div'); cap.className = 'cap'; cap.innerHTML = `<b>${k}</b>`;
+  it.append(f, cap); m.append(it);
+});
+</script></body></html>

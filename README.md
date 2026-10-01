@@ -25,11 +25,11 @@ Tabs switch platform, **Show originals** puts the reference shots next to the iO
 ## Export PNGs
 
 ```bash
-V=v15 node "App Store Screenshots/tools/export.mjs" ios
+V=v16 node "App Store Screenshots/tools/export.mjs" ios
 ```
-Use `ios`, `ipad`, `mac` or `android`; optional slide list, e.g. `ios 3,5`. Output: `exports/v15/<platform>/NN.png` at native size.
+Use `ios`, `ipad`, `mac` or `android`; optional slide list, e.g. `ios 3,5`. Output: `exports/v16/<platform>/NN.png` at native size.
 
-## Structure (`v15/`)
+## Structure (`v16/`)
 
 - `index.html` — the dashboard (`?only=ios-3` renders one slide at 1:1 for export).
 - `kit/`, `screens/`, `assets/` — the UI kit and mobile/desktop screen replicas carried over from the video project.
