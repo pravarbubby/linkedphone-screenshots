@@ -198,7 +198,7 @@ function decorate() {
       cb.onchange = () => { pick = cb.checked ? [...new Set([...pick, n])].sort((x, y) => x - y).slice(0, PLAY_MAX) : pick.filter(m => m !== n); savePick(); sync(); };
       lab.append(cb, sw, t); foot.append(lab);
     } else {
-      const f = document.createElement('span'); f.className = 'db-fmt'; f.textContent = `PNG · ${META[p].size.replace('x', ' × ')}`; foot.append(f);
+      const f = document.createElement('span'); f.className = 'db-fmt'; f.innerHTML = `PNG<span class="db-dim"> · ${META[p].size.replace('x', ' × ')}</span>`; foot.append(f);
     }
     const b = document.createElement('button'); b.className = 'db-png'; b.innerHTML = IC_DL; b.title = 'Download ' + fileName(p, n); b.setAttribute('aria-label', 'Download PNG');
     b.onclick = (e) => { e.stopPropagation(); downloadOne(p, n); };

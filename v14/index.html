@@ -6,15 +6,27 @@
   :root { --page: var(--g98); --panel: #FFFFFF; --muted: var(--g40); --line: var(--g90); --accent: var(--blue); --accent-soft: var(--blue95); }
   html, body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 var(--sf); -webkit-font-smoothing: antialiased; }
   header.db-top { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.92); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
-  .db-bar { display: flex; align-items: center; gap: 14px; padding: 14px 28px 0; flex-wrap: wrap; }
-  .db-brand { display: flex; align-items: center; gap: 10px; font: 800 18px/1 var(--sf); letter-spacing: -.2px; }
-  .db-brand svg { width: 26px; height: 26px; }
-  .db-ver { font: 500 13px/1 var(--sf); color: var(--ink); background: var(--blue95); padding: 5px 8px; border-radius: 6px; }
+  .db-bar { display: flex; align-items: center; gap: 16px; padding: 16px 28px 0; }
+  .db-brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .db-logo { height: 24px; width: auto; flex: none; color: var(--ink); display: block; }
+  .db-div { width: 1px; height: 24px; background: var(--g90); flex: none; }
+  .db-title { margin: 0; font: 600 22px/1 "Rebond", var(--sf); letter-spacing: -.2px; color: var(--ink); white-space: nowrap; }
+  .db-ver { flex: none; font: 600 12px/1 var(--sf); color: var(--blue); background: var(--blue95); padding: 5px 7px; border-radius: 6px; }
   .db-bar .db-sp { flex: 1; }
-  .db-ctl { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; }
-  .db-ctl input[type=range] { width: 120px; accent-color: var(--accent); }
-  .db-ctl label { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
-  .db-ctl input[type=checkbox] { accent-color: var(--accent); }
+  .db-ctl { display: flex; align-items: center; gap: 16px; }
+  .db-tog { display: flex; align-items: center; gap: 8px; font: 500 13px/1 var(--sf); color: var(--g30); cursor: pointer; user-select: none; }
+  .db-tog input { position: absolute; opacity: 0; pointer-events: none; }
+  .db-tog i { width: 32px; height: 20px; border-radius: 10px; background: var(--g80); position: relative; transition: background .15s; }
+  .db-tog i::after { content: ""; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(23,26,43,.2); transition: left .15s; }
+  .db-tog input:checked + i { background: var(--blue); }
+  .db-tog input:checked + i::after { left: 14px; }
+  .db-tog input:focus-visible + i { outline: 2px solid var(--blue); outline-offset: 2px; }
+  /* kit segmented control (desktop contact panel) */
+  .db-seg { display: flex; align-items: center; gap: 10px; font: 500 13px/1 var(--sf); color: var(--g40); }
+  .db-seg > div { display: flex; padding: 2px; border-radius: 18px; background: var(--g95); }
+  .db-seg button { appearance: none; border: 0; background: none; height: 30px; padding: 0 12px; border-radius: 15px; font: 500 13px/1 var(--sf); color: var(--g30); cursor: pointer; }
+  .db-seg button[aria-pressed=true] { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(23,26,43,.12); }
+  .db-seg button:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
   nav.db-tabs { display: flex; gap: 8px; padding: 14px 28px 14px; overflow-x: auto; scrollbar-width: none; }
   nav.db-tabs::-webkit-scrollbar { display: none; }
   nav.db-tabs button { appearance: none; flex: none; height: 38px; border-radius: 20px; border: 1px solid var(--g90); background: #fff; padding: 0 14px; font: 400 15px/1 var(--sf); color: var(--ink); cursor: pointer; display: flex; gap: 8px; align-items: center; white-space: nowrap; }
@@ -55,17 +67,17 @@
   .db-lb .db-hint { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #C9CCE4; font-size: 12.5px; }
   body.render { background: transparent; }
   body.render header, body.render main { display: none; }
-  @media (max-width: 640px) { .db-bar, main, nav.db-tabs { padding-left: 16px; padding-right: 16px; } .db-head, .db-status { padding-left: 14px; padding-right: 14px; } .db-media { padding: 8px; } .db-actions, .db-actions > * { width: 100%; justify-content: center; } .db-brand { font-size: 16px; } .db-brand .db-co { display: none; } #cmpWrap { display: none !important; } .db-bar { flex-wrap: nowrap; padding-top: 12px; } .db-bar .db-sp { min-width: 0; } .db-ctl > span, .db-ctl input[type=range] { display: none; } }
+  @media (max-width: 640px) { .db-bar, main, nav.db-tabs { padding-left: 16px; padding-right: 16px; } .db-head, .db-status { padding-left: 14px; padding-right: 14px; } .db-media { padding: 8px; } .db-actions, .db-actions > * { width: 100%; justify-content: center; } .db-logo { height: 18px; } .db-title { font-size: 16px; } .db-brand { gap: 9px; } .db-dim { display: none; } .db-ctl { display: none; } #cmpWrap { display: none !important; } .db-bar { flex-wrap: nowrap; padding-top: 12px; } .db-bar .db-sp { min-width: 0; } }
 </style></head>
 <body>
 <header class="db-top">
   <div class="db-bar">
-    <div class="db-brand"><svg viewBox="0 0 100 100"><path d="M38.2 61.8h-7.8a7.8 7.8 0 1 0 7.8 7.8Zm39.2-23.9a15.3 15.3 0 0 0-30.5 0v15.3h15.2c8.4 0 15.3-6.9 15.3-15.3Zm8.6 0c0 13.2-10.7 23.9-23.9 23.9H46.8v7.8a16.4 16.4 0 1 1-16.4-16.4h7.8V37.9a23.9 23.9 0 0 1 47.8 0Z" fill="#3356FF"/></svg><span><span class="db-co">LinkedPhone · </span>Store Screenshots</span></div>
-    <span class="db-ver">V14</span>
+    <div class="db-brand"><svg class="db-logo" viewBox="13 13 499 74" role="img" aria-label="LinkedPhone"><path fill="#3356FF" d="M38.2016 61.7984H30.4208C26.1236 61.7985 22.64 65.282 22.64 69.5792C22.64 73.8764 26.1236 77.36 30.4208 77.36C34.718 77.36 38.2015 73.8764 38.2016 69.5792V61.7984ZM77.36 37.8992C77.36 29.4718 70.5282 22.64 62.1008 22.64C53.6734 22.64 46.8416 29.4718 46.8416 37.8992V53.1584H62.1008C70.5282 53.1584 77.36 46.3266 77.36 37.8992ZM86 37.8992C86 51.0983 75.2999 61.7984 62.1008 61.7984H46.8416V69.5792C46.8415 78.6482 39.4897 86 30.4208 86C21.3518 86 14 78.6481 14 69.5792C14 60.5103 21.3518 53.1585 30.4208 53.1584H38.2016V37.8992C38.2016 24.7001 48.9017 14 62.1008 14C75.2999 14 86 24.7001 86 37.8992Z"/><path fill="currentColor" d="M113.875 73V27.9062H121.938V66.2188H142.625V73H113.875ZM154.5 33.125C151.938 33.125 149.844 31.0938 149.844 28.5312C149.844 26 151.938 23.9375 154.5 23.9375C157.031 23.9375 159.125 26 159.125 28.5312C159.125 31.0938 157.031 33.125 154.5 33.125ZM150.594 73V38.8438H158.375V73H150.594ZM167.938 73V38.8438H175.719V44.0625H176.25C177.875 40.4062 181.156 38.1875 186.094 38.1875C193.719 38.1875 197.875 42.7812 197.875 50.9062V73H190.094V52.7188C190.094 47.4062 187.938 44.7188 183.219 44.7188C178.594 44.7188 175.719 47.9688 175.719 53.0938V73H167.938ZM207.375 73V25.625H215.156V52.8438H215.688L228.281 38.8438H237.281L223.531 53.2812L238.219 73H228.844L217.875 58.2188L215.156 61V73H207.375ZM256.938 73.6875C246.781 73.6875 240.625 66.875 240.625 56V55.9688C240.625 45.2188 246.844 38.1875 256.562 38.1875C266.281 38.1875 272.281 45 272.281 55.3125V57.875H248.406C248.5 64 251.812 67.5625 257.094 67.5625C261.312 67.5625 263.719 65.4375 264.469 63.875L264.562 63.6562H271.969L271.875 63.9375C270.781 68.3438 266.219 73.6875 256.938 73.6875ZM256.656 44.2812C252.312 44.2812 249.062 47.2188 248.469 52.6562H264.688C264.156 47.0625 261 44.2812 256.656 44.2812ZM292.375 73.5625C283.812 73.5625 278.375 66.7812 278.375 55.9688V55.9062C278.375 45.0312 283.719 38.2812 292.375 38.2812C297.062 38.2812 300.969 40.5938 302.75 44.2812H303.281V25.625H311.094V73H303.281V67.6562H302.75C300.875 71.375 297.188 73.5625 292.375 73.5625ZM294.812 67C300.125 67 303.406 62.8125 303.406 55.9688V55.9062C303.406 49.0625 300.094 44.8438 294.812 44.8438C289.531 44.8438 286.281 49.0312 286.281 55.9062V55.9688C286.281 62.8438 289.5 67 294.812 67ZM321.688 73V27.9062H339.688C348.844 27.9062 355.031 33.9375 355.031 42.9688V43.0312C355.031 52.0312 348.844 58.0938 339.688 58.0938H329.75V73H321.688ZM337.719 34.5H329.75V51.5938H337.719C343.5 51.5938 346.875 48.4688 346.875 43.0625V43C346.875 37.5938 343.5 34.5 337.719 34.5ZM363.438 73V25.625H371.219V44.0625H371.75C373.375 40.4062 376.656 38.1875 381.594 38.1875C389.219 38.1875 393.375 42.7812 393.375 50.9062V73H385.594V52.7188C385.594 47.4062 383.438 44.7188 378.719 44.7188C374.094 44.7188 371.219 47.9688 371.219 53.0938V73H363.438ZM417.312 73.6875C407.062 73.6875 400.875 67 400.875 55.9375V55.875C400.875 44.9062 407.156 38.1875 417.312 38.1875C427.5 38.1875 433.75 44.875 433.75 55.875V55.9375C433.75 67 427.531 73.6875 417.312 73.6875ZM417.312 67.375C422.719 67.375 425.781 63.1562 425.781 55.9688V55.9062C425.781 48.7188 422.688 44.4688 417.312 44.4688C411.906 44.4688 408.812 48.7188 408.812 55.9062V55.9688C408.812 63.1562 411.906 67.375 417.312 67.375ZM441.562 73V38.8438H449.344V44.0625H449.875C451.5 40.4062 454.781 38.1875 459.719 38.1875C467.344 38.1875 471.5 42.7812 471.5 50.9062V73H463.719V52.7188C463.719 47.4062 461.562 44.7188 456.844 44.7188C452.219 44.7188 449.344 47.9688 449.344 53.0938V73H441.562ZM495.312 73.6875C485.156 73.6875 479 66.875 479 56V55.9688C479 45.2188 485.219 38.1875 494.938 38.1875C504.656 38.1875 510.656 45 510.656 55.3125V57.875H486.781C486.875 64 490.188 67.5625 495.469 67.5625C499.688 67.5625 502.094 65.4375 502.844 63.875L502.938 63.6562H510.344L510.25 63.9375C509.156 68.3438 504.594 73.6875 495.312 73.6875ZM495.031 44.2812C490.688 44.2812 487.438 47.2188 486.844 52.6562H503.062C502.531 47.0625 499.375 44.2812 495.031 44.2812Z"/></svg><span class="db-div"></span><h1 class="db-title">Store Screenshots</h1><span class="db-ver">V14</span></div>
     <span class="db-sp"></span>
     <div class="db-ctl">
-      <label id="cmpWrap"><input type="checkbox" id="cmp"> Show originals</label>
-      <span>Size</span><input type="range" id="zoom" min="140" max="560" value="300" aria-label="Thumbnail height">
+      <label class="db-tog" id="cmpWrap"><input type="checkbox" id="cmp"><i></i>Show originals</label>
+      <div class="db-seg"><span>Size</span><div id="sizes" role="group" aria-label="Thumbnail size"><button data-v="220">S</button><button data-v="300">M</button><button data-v="420">L</button></div></div>
+      <input type="hidden" id="zoom" value="300">
     </div>
   </div>
   <nav class="db-tabs" role="tablist" id="tabs"></nav>
@@ -175,9 +187,12 @@ if (q.get('only')) {
     if (e.key === 'ArrowRight') step(1); if (e.key === 'ArrowLeft') step(-1);
   });
   cmp.onchange = () => { store('cmp', cmp.checked ? '1' : '0'); draw(); };
-  zoom.oninput = () => { store('zoom', zoom.value); draw(); };
+  const sizeBtns = [...document.querySelectorAll('#sizes button')];
+  const markSize = () => { const v = +zoom.value, near = sizeBtns.reduce((a, b) => Math.abs(b.dataset.v - v) < Math.abs(a.dataset.v - v) ? b : a); sizeBtns.forEach(b => b.setAttribute('aria-pressed', b === near)); };
+  sizeBtns.forEach(b => b.onclick = () => { zoom.value = b.dataset.v; store('zoom', zoom.value); markSize(); draw(); });
+  markSize();
   let lastW = innerWidth, rt; addEventListener('resize', () => { if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(rt); rt = setTimeout(draw, 150); });
   draw();
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script src="store/handoff.js?v=14h"></script><script src="../versions-nav.js"></script></body></html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script src="store/handoff.js?v=14i"></script><script src="../versions-nav.js"></script></body></html>
