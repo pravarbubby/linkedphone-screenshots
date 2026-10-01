@@ -9,7 +9,7 @@ const b = await launch(); const p = await b.newPage({ viewport: { width: W, heig
 const errs = []; p.on('pageerror', e => errs.push(e.message));
 const ns = list ? list.split(',').map(Number) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 for (const n of ns) {
-  await p.goto(`http://localhost:8765/App%20Store%20Screenshots/${ver}/index.html?only=${plat}-${n}`, { waitUntil: 'networkidle' });
+  await p.goto(`http://localhost:${process.env.PORT || 8765}/App%20Store%20Screenshots/${ver}/index.html?only=${plat}-${n}`, { waitUntil: 'networkidle' });
   if (!(await p.evaluate(() => !!document.querySelector('.slide')))) { console.log(n, 'not built'); continue; }
   await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(150);
   await p.screenshot({ path: `${out}/${String(n).padStart(2, '0')}.png`, clip: { x: 0, y: 0, width: W, height: H } });
