@@ -1,0 +1,51 @@
+/* LinkedPhone store screenshots — slide canvas, backgrounds, device frames, pop-out cards.
+   All slide geometry is in output pixels (iOS 1290×2796, iPad 2064×2752, Mac 2880×1800, Android 1440×2880). */
+@font-face { font-family: "Rebond"; src: url("../assets/fonts/rebond.woff2") format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "InterV"; src: url("../assets/fonts/inter.woff2") format("woff2"); font-weight: 100 900; }
+
+.slide { position: relative; overflow: hidden; background: #DFE1F8; font-family: var(--sf); color: #171A2B; -webkit-font-smoothing: antialiased; }
+.slide * { box-sizing: border-box; }
+.slide .bg { position: absolute; inset: 0; }
+
+/* standard App Store background: white → pink glow (top) → lavender → cyan glow (bottom) */
+.bg-std {
+  background:
+    radial-gradient(52% 9% at 50% 15.5%, rgba(238, 214, 238, .95) 0%, rgba(238, 214, 238, 0) 100%),
+    radial-gradient(70% 13% at 50% 101%, rgba(184, 221, 240, 1) 0%, rgba(184, 221, 240, .55) 45%, rgba(184, 221, 240, 0) 100%),
+    linear-gradient(180deg, #FEFAFD 0%, #F8EEF7 9%, #F1E6F5 18%, #E8E4F8 33%, #DFE1F8 50%, #DCE1F7 58%, #D3DFF4 72%, #CBDCF1 84%, #CEDFF3 100%);
+}
+/* slide 1 variant: cyan glow on the left, flat lavender bottom */
+.bg-hero {
+  background:
+    radial-gradient(40% 10% at 54% 2%, rgba(247, 226, 241, 1) 0%, rgba(247, 226, 241, 0) 100%),
+    radial-gradient(34% 18% at -4% 34%, rgba(186, 224, 240, 1) 0%, rgba(186, 224, 240, .5) 50%, rgba(186, 224, 240, 0) 100%),
+    linear-gradient(180deg, #FFFFFF 0%, #FBF9FE 6%, #F5F5FC 14%, #EEEEFB 22%, #E5E6FA 33%, #DFE1F8 46%, #DFE1F8 100%);
+}
+
+.hl { position: absolute; left: 0; right: 0; text-align: center; font-family: "Rebond", var(--sf); font-weight: 600; color: #171A2B; letter-spacing: 0; white-space: nowrap; }
+.sub { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--sf); font-weight: 400; color: #171A2B; white-space: nowrap; }
+.sub b { font-weight: 600; }
+.blue { color: #3356FF; }
+.hl .blue { color: #3958FF; }
+
+/* iPhone frame */
+.dev { position: absolute; }
+.dev .bezel { position: absolute; inset: 0; background: #15182A; }
+.dev .screen { position: absolute; overflow: hidden; background: #fff; }
+.dev .screen > .scr { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+
+/* pop-out card: an enlarged copy of a real UI element on a white card */
+.pop { position: absolute; background: #fff; overflow: hidden; box-shadow: 0 0 0 2.5px rgba(222, 224, 250, .9), 0 34px 90px rgba(52, 62, 130, .16), 0 10px 30px rgba(52, 62, 130, .08); }
+.pop > .in { position: absolute; left: 0; top: 0; transform-origin: 0 0; font-family: var(--sf); color: #171A2B; }
+.pop > .in * { box-sizing: border-box; }
+.pop.dark { background: #000; box-shadow: 0 0 0 2.5px #262A40, 0 0 120px rgba(70, 80, 170, .30), 0 34px 90px rgba(20, 24, 60, .28); }
+.pop.clear { background: transparent; box-shadow: none; overflow: visible; }
+
+/* Mac frame */
+.mac .lid { position: absolute; background: #0E0F14; }
+.mac .base { position: absolute; }
+
+/* soft shadow under devices */
+.devshadow { position: absolute; border-radius: 50%; background: radial-gradient(closest-side, rgba(40, 50, 110, .22), rgba(40, 50, 110, 0)); }
+
+.pop.num { background: linear-gradient(100deg, #F9F9FF 0%, #F2F2FD 45%, #E9EBFA 100%); }

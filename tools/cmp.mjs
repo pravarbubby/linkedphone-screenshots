@@ -1,0 +1,22 @@
+// node tools/cmp.mjs ios 3 out.png [x0 y0 x1 y1]  → original | replica | 50% overlay (optionally cropped)
+import { launch } from '../../lib-chrome.mjs';
+const [plat, n, out, ...crop] = process.argv.slice(2);
+const SIZES = { ios: [1290, 2796], ipad: [2064, 2752], mac: [2880, 1800], android: [1440, 2880], androidS: [900, 1600] };
+const [W, H] = SIZES[plat];
+const ver = process.env.V || 'v1';
+const b = await launch(); const p = await b.newPage({ viewport: { width: W, height: H } });
+const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => m.type() === 'error' && errs.push(m.text()));
+await p.goto(`http://localhost:8765/App%20Store%20Screenshots/${ver}/index.html?only=${plat}-${n}`, { waitUntil: 'networkidle' });
+await p.waitForTimeout(300);
+const raw = await p.screenshot({ clip: { x: 0, y: 0, width: W, height: H } }); if (process.env.RAW) (await import('fs')).writeFileSync(process.env.RAW, raw); const shot = raw.toString('base64');
+const [x0, y0, x1, y1] = crop.length ? crop.map(Number) : [0, 0, W, H];
+const cw = x1 - x0, ch = y1 - y0, sc = Math.min(1, 900 / ch, 640 / cw);
+const ref = plat === 'ios' ? `http://localhost:8765/App%20Store%20Screenshots/refs/ios_${n}.jpg` : null;
+const p2 = await b.newPage({ viewport: { width: Math.ceil(cw * sc) * 3 + 20, height: Math.ceil(ch * sc) } });
+const cell = (src, op = 1) => `<div style="position:relative;width:${cw * sc}px;height:${ch * sc}px;overflow:hidden;flex:none"><img src="${src}" style="position:absolute;left:${-x0 * sc}px;top:${-y0 * sc}px;width:${W * sc}px;height:${H * sc}px;opacity:${op}"></div>`;
+const me = 'data:image/png;base64,' + shot;
+await p2.setContent(`<body style="margin:0;display:flex;gap:10px;background:#222">${ref ? cell(ref) : ''}${cell(me)}<div style="position:relative">${ref ? cell(ref) : ''}<div style="position:absolute;inset:0">${cell(me, .5)}</div></div></body>`);
+await p2.waitForTimeout(300);
+await p2.screenshot({ path: out });
+console.log(errs.length ? 'ERRORS:\n' + errs.join('\n') : 'ok');
+await b.close();

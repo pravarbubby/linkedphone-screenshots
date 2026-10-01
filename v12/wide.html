@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Wide Screens</title>
+<link rel="stylesheet" href="kit/ui.css"><link rel="stylesheet" href="kit/desktop.css"><link rel="stylesheet" href="store/store.css">
+<style>body{margin:0;background:#222}main{display:flex;flex-wrap:wrap;gap:16px;padding:16px}.f{position:relative;overflow:hidden;background:#fff;border-radius:12px}.f>.scr375{transform-origin:0 0}</style></head>
+<body><main id="m"></main>
+<script src="kit/icons.js"></script><script src="kit/ui.js"></script><script>window.SCREENS={}</script>
+<script src="screens/calls.js"></script><script src="screens/lisa.js"></script><script src="screens/messaging.js"></script><script src="screens/profile.js"></script>
+<script src="store/engine.js"></script><script src="store/m-screens.js"></script><script src="store/widen.js"></script><script src="store/t-screens.js"></script>
+<script>
+const q=new URLSearchParams(location.search), W=+(q.get('w')||800), H=+(q.get('h')||1067), sc=+(q.get('s')||.55);
+const L=Object.keys(TS);
+(q.get('k')?q.get('k').split(','):L).forEach(k=>{const f=document.createElement('div');f.className='f';f.style.cssText=`width:${W*sc}px;height:${H*sc}px`;
+ try{const el=TS[k](W,H);el.style.transform=`scale(${sc})`;f.append(el)}catch(e){f.textContent=k+': '+e.message;console.error(e)} m.append(f)});
+</script></body></html>

@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LinkedPhone Store Screenshots</title>
+<style>body{margin:0;font:15px -apple-system,system-ui;background:#F4F5FA;color:#171A2B;display:grid;place-items:center;min-height:100vh}</style>
+</head><body>
+<p id="m">Opening the latest version…</p>
+<script>
+// Opens the newest version of the screenshot dashboard (see versions.json); the version picker inside switches between them.
+fetch('versions.json?t=' + Date.now()).then(r => r.json()).then(l => { location.replace(l[l.length - 1].v + '/index.html'); })
+  .catch(() => { document.getElementById('m').innerHTML = 'Run <code>python3 -m http.server 8765</code> from the project folder, then open <a href="http://localhost:8765/App%20Store%20Screenshots/">localhost:8765/App Store Screenshots/</a>'; });
+</script></body></html>
