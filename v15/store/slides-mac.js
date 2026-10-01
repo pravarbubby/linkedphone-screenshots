@@ -43,7 +43,7 @@ const transferDialog = () => {
   const P = (css, kids) => h('div', '', 'position:absolute;' + css, kids);
   return P('inset:0', [
     P('left:136px;top:18px;width:158px;height:62px;border-radius:22px;background:#D7FDB7'),
-    P(`left:146px;top:25px;width:48px;height:48px;border-radius:14px;background:${img('keisha')} center/cover;box-shadow:0 0 0 2px #fff`),
+    P(`left:146px;top:25px;width:48px;height:48px;border-radius:14px;background:${img('sandy')} center/cover;box-shadow:0 0 0 2px #fff`),
     P(`left:236px;top:25px;width:48px;height:48px;border-radius:14px;background:${img('alexis')} center/cover;box-shadow:0 0 0 2px #fff`),
     icon('Call Transfer|Bold', 'position:absolute;left:202px;top:37px;width:26px;height:26px;color:#3F7D1C'),
     P('left:272px;top:61px;width:14px;height:14px;border-radius:50%;background:#3F8A12;box-shadow:0 0 0 2.5px #fff'),
