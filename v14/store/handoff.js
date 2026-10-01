@@ -108,7 +108,7 @@ const CSS = `
 .sp-gstats b { font:500 14px Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; } .sp-gstats small { font:400 12px Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; color:#5F6368; }
 .sp-install { background:#0B57D0; color:#fff; text-align:center; font:500 14px/40px Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; border-radius:20px; margin:0 0 18px; }
 .db-dlall, .db-prev { appearance:none; border:1px solid #D7DBF5; background:#fff; color:#3356FF; font:600 13px/1 -apple-system,system-ui; padding:9px 14px; border-radius:9px; cursor:pointer; }
-.db-prev { background:#3356FF; color:#fff; border-color:#3356FF; }
+.db-dlall { background:#3356FF; color:#fff; border-color:#3356FF; }
 .db-dlall:disabled { opacity:.6; }
 .db-hdl { position:absolute; right:10px; top:10px; z-index:3; opacity:0; transition:opacity .15s; border:0; background:rgba(23,26,43,.86); color:#fff; font:600 12px/1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; padding:8px 11px; border-radius:8px; cursor:pointer; }
 .db-pair:hover .db-hdl { opacity:1; }
