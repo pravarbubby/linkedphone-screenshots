@@ -138,7 +138,6 @@ const CSS = `
 .db-png svg { width:18px; height:18px; }
 /* excluded: same card, visibly set aside — dashed outline, muted art and text */
 .db-card.db-off { background:var(--g98); border-style:dashed; border-color:var(--g80); }
-.db-card.db-off .db-media { background:transparent; }
 .db-card.db-off .db-thumb > .db-inner { opacity:.35; filter:grayscale(1); }
 .db-card.db-off .db-t, .db-card.db-off .db-pick { color:var(--g50); }
 .db-card.db-off .db-i { background:var(--g95); color:var(--g50); }
