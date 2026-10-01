@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LinkedPhone Store Screenshots · Versions</title>
+<style>html,body{margin:0;height:100%;background:#F4F5FA;color:#171A2B;font:15px -apple-system,system-ui}iframe{position:fixed;inset:0;width:100%;height:100%;border:0}#m{display:grid;place-items:center;min-height:100vh}</style>
+</head><body>
+<p id="m">Loading…</p>
+<script>
+// Same dashboard as the main link, plus the Version picker (versions-nav.js shows it only inside this page).
+// #v12 in the URL opens that version; the picker updates it, so a version link can be shared.
+fetch('../versions.json?t=' + Date.now()).then(r => r.json()).then(l => {
+  const ok = new Set(l.map(x => x.v)), latest = l[l.length - 1].v;
+  const f = document.createElement('iframe'); f.title = 'LinkedPhone Store Screenshots';
+  const show = () => { const v = location.hash.slice(1); f.src = '../' + (ok.has(v) ? v : latest) + '/index.html'; };
+  addEventListener('hashchange', show); show();
+  document.body.replaceChildren(f);
+}).catch(() => { document.getElementById('m').textContent = 'Could not load versions.json — serve this folder over HTTP (python3 -m http.server).'; });
+</script></body></html>

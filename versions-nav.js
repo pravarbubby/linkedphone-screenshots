@@ -1,5 +1,8 @@
-/* Version switcher — shared by every vN/index.html. Reads ../versions.json and adds a picker to the header. */
+/* Version switcher — shared by every vN/index.html. Reads ../versions.json and adds a picker to the header,
+   but only when the dashboard is opened through the versions/ page (the main link shows the latest with no picker). */
 (() => {
+  let shell = null; try { shell = window.top !== window && /\/versions\/(index\.html)?$/.test(top.location.pathname) ? top : null; } catch (e) {}
+  if (!shell) return;
   const cur = (location.pathname.match(/\/(v\d+)\//) || [])[1];
   const fmt = (iso) => { const d = new Date(iso); return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) + ' · ' + d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }); };
   fetch('../versions.json?t=' + Date.now()).then(r => r.json()).then(list => {
@@ -13,7 +16,7 @@
       o.textContent = `${v.toUpperCase()}${i === 0 ? ' (latest)' : ''} — ${fmt(updated)}`;
       if (v === cur) o.selected = true; sel.append(o);
     });
-    sel.onchange = () => { location.href = `../${sel.value}/index.html`; };
+    sel.onchange = () => { shell.location.hash = sel.value; };
     wrap.append('Version', sel);
     const ver = document.querySelector('.db-ver') || document.querySelector('.ver');
     if (ver) ver.replaceWith(wrap);

@@ -2,7 +2,10 @@
 
 One dashboard, four stores, 10 slides each — every screen is live HTML built from the product UI kit.
 
-**Live:** https://pravarbubby.github.io/linkedphone-store-screenshots/ — opens the latest version; download PNGs per slide or as a .zip per device. Final PNGs are also in [`exports/`](exports/).
+**Live:** https://pravarbubby.github.io/linkedphone-screenshots/ — always the latest version; download PNGs per slide or as a .zip per device. Final PNGs are also in [`exports/`](exports/).
+**All versions:** https://pravarbubby.github.io/linkedphone-screenshots/versions/ — same dashboard with the **Version** picker (`…/versions/#v12` links to one version).
+
+Google Play takes at most 8 phone screenshots, so on both Android tabs slides 9–10 start greyed out; tick **Include** to swap which 8 go in. **Download selected 8 for Android (.zip)** zips only those, numbered 01–08 in upload order.
 
 | Tab | Device | Size (px) | Layout |
 |---|---|---|---|
@@ -16,17 +19,17 @@ One dashboard, four stores, 10 slides each — every screen is live HTML built f
 ```bash
 python3 -m http.server 8765
 ```
-Run from this folder, then open http://localhost:8765/ — it opens the latest version; switch versions from the **Version** picker (each shows its last-updated time).
+Run from this folder, then open http://localhost:8765/ for the latest, or http://localhost:8765/versions/ to switch versions from the **Version** picker (each shows its last-updated time).
 Tabs switch platform, **Show originals** puts the reference shots next to the iOS slides, click a slide for a full-size view (← → to step), **PNG** downloads the export.
 
 ## Export PNGs
 
 ```bash
-V=v13 node "App Store Screenshots/tools/export.mjs" ios
+V=v14 node "App Store Screenshots/tools/export.mjs" ios
 ```
-Use `ios`, `ipad`, `mac` or `android`; optional slide list, e.g. `ios 3,5`. Output: `exports/v13/<platform>/NN.png` at native size.
+Use `ios`, `ipad`, `mac` or `android`; optional slide list, e.g. `ios 3,5`. Output: `exports/v14/<platform>/NN.png` at native size.
 
-## Structure (`v13/`)
+## Structure (`v14/`)
 
 - `index.html` — the dashboard (`?only=ios-3` renders one slide at 1:1 for export).
 - `kit/`, `screens/`, `assets/` — the UI kit and mobile/desktop screen replicas carried over from the video project.
@@ -41,7 +44,7 @@ QA helpers in `tools/`: `cmp.mjs ios 3 out.png [x0 y0 x1 y1]` (original | replic
 
 ## Versions
 
-V1 is kept untouched in `v1/`. Exports for V2 need `V=v13` in front of the export command.
+V1 is kept untouched in `v1/`. Exports for V2 need `V=vN` in front of the export command.
 
 ## Handoff
 
