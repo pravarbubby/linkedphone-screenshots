@@ -260,7 +260,7 @@ M.introCard = (w = 340) => {
 const TM = [
   { av: 'jesse', name: 'Jesse Di Lucca', admin: true, ph: '+1 (971) 567-1234', d: 'Sales · Support', st: '#3F8A12' },
   { av: 'alexis', name: 'Alexis Johnson', ph: '+1 (971) 567-9352', d: 'Billing', st: '#C0392B' },
-  { av: 'sandy', name: 'Sandy Grossman', ph: '+1 (202) 555-0832', d: 'After Hours', st: '#3F8A12' },
+  { av: 'sandy', name: 'Sandy Chen', ph: '+1 (202) 555-0832', d: 'After Hours', st: '#3F8A12' },
   { av: 'bob', name: 'Bob Hart', ph: '+1 (971) 555-1212', d: 'Owner', st: '#3F8A12' },
   { av: 'metickets', name: 'Quincy Hayes', ph: '+1 (202) 555-0199', d: 'Orders · After Hours', st: '#74768A' },
   { av: 'liamj', name: 'Andre Collins', ph: '+1 (202) 555-0456', d: 'Sales · Support', st: '#C0392B' },

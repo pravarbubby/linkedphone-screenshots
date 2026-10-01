@@ -404,7 +404,7 @@ function menuCol(x, H, active) {
 const TEAM = [
   { av: 'jesse', name: 'Jesse Di Lucca', admin: true, ph: '+1 (971) 567-1234', d: '101 · Sales · Support', st: '#3F8A12' },
   { av: 'alexis', name: 'Alexis Johnson', ph: '+1 (971) 567-9352', d: '102 · Billing', st: '#C0392B' },
-  { av: 'sandy', name: 'Sandy Grossman', ph: '+1 (202) 555-0832', d: '103 · After Hours', st: '#3F8A12' },
+  { av: 'sandy', name: 'Sandy Chen', ph: '+1 (202) 555-0832', d: '103 · After Hours', st: '#3F8A12' },
   { av: 'metickets', name: 'Quincy Hayes', ph: '+1 (202) 555-0199', d: '104 · Orders · After Hours', st: '#74768A' },
   { av: 'liamj', name: 'Andre Collins', ph: '+1 (202) 555-0456', d: '105 · Sales · Support', st: '#C0392B' },
   { av: 'priya', name: 'Natasha Murphy', ph: '+1 (202) 555-0311', d: '106 · Support', st: '#3F8A12' },
@@ -599,7 +599,7 @@ const TEAM4 = [
   { lisa: true, name: 'Lisa (AI Agent)', st: '#3F8A12' },
   { av: 'alexis', name: 'Alexis Johnson', ph: '+1 (971) 567-9352', ext: '101', st: '#3F8A12' },
   { av: 'liamj', name: 'Andre Collins', ph: '+1 (202) 555-0456', ext: '102', st: '#3F8A12' },
-  { av: 'sandy', name: 'Sandy Grossman', ph: '+1 (202) 555-0832', ext: '103', st: '#C0392B' },
+  { av: 'sandy', name: 'Sandy Chen', ph: '+1 (202) 555-0832', ext: '103', st: '#C0392B' },
   { av: 'metickets', name: 'Quincy Hayes', ph: '+1 (202) 555-0199', ext: '104', st: '#74768A' },
   { av: 'priya', name: 'Natasha Murphy', ph: '+1 (202) 555-0311', ext: '105', st: '#3F8A12' },
 ];
