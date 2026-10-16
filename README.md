@@ -1,6 +1,6 @@
 # LinkedPhone — Store Screenshots
 
-One dashboard, four stores, 10 slides each — every screen is live HTML built from the product UI kit.
+One dashboard, five stores, 10 slides each — every screen is live HTML built from the product UI kit.
 
 **Live:** https://pravarbubby.github.io/linkedphone-screenshots/ — always the latest version; download PNGs per slide or as a .zip per device. Final PNGs are also in [`exports/`](exports/).
 **All versions:** https://pravarbubby.github.io/linkedphone-screenshots/versions/ — same dashboard with the **Version** picker (`…/versions/#v12` links to one version).
@@ -12,6 +12,7 @@ Google Play takes at most 8 phone screenshots. On both Android tabs, 08 Transfer
 | iOS | iPhone 6.9″ | 1290 × 2796 | Recreation of `refs/ios_1…10.jpg` |
 | iPadOS | iPad 13″ portrait | 2064 × 2752 | Single-column app UI widened to 608 pt (per `refs/appstore/ipad refs`) |
 | macOS | macOS window | 2880 × 1800 | MacBook Pro 14″ app (1512×945 pt) at 1.4×; panes: rail 72 · list 360 · centre ≥400 · context 360 |
+| Windows | Microsoft Store desktop | 3840 × 2160 | The macOS slides with a Windows 11 title bar (icon + title, minimise / maximise / close), centred on a 16:9 3200×1800 canvas and exported at 1.2× |
 | Android | Google Play phone | 1440 × 2880 | iPhone compositions in an Android frame |
 
 ## Open the dashboard locally
@@ -25,11 +26,11 @@ Tabs switch platform, **Show originals** puts the reference shots next to the iO
 ## Export PNGs
 
 ```bash
-V=v16 node "App Store Screenshots/tools/export.mjs" ios
+V=v17 node "App Store Screenshots/tools/export.mjs" ios
 ```
-Use `ios`, `ipad`, `mac` or `android`; optional slide list, e.g. `ios 3,5`. Output: `exports/v16/<platform>/NN.png` at native size.
+Use `ios`, `ipad`, `mac`, `win` or `android`; optional slide list, e.g. `ios 3,5`. Output: `exports/v17/<platform>/NN.png` at native size.
 
-## Structure (`v16/`)
+## Structure (`v17/`)
 
 - `index.html` — the dashboard (`?only=ios-3` renders one slide at 1:1 for export).
 - `kit/`, `screens/`, `assets/` — the UI kit and mobile/desktop screen replicas carried over from the video project.
@@ -37,7 +38,7 @@ Use `ios`, `ipad`, `mac` or `android`; optional slide list, e.g. `ios 3,5`. Outp
 - `store/m-screens.js` — mobile screens and cards as they appear in the App Store set.
 - `store/d-screens.js` — responsive desktop compositions (Inbox, Calls, Tickets, AI Receptionist, Auto Attendant, Team, Business).
 - `store/widen.js` + `t-screens.js` — re-lays mobile screens out at iPad width.
-- `store/slides-ios.js`, `slides-ipad.js`, `slides-mac.js`, `slides-android.js` — the 10 slides per platform.
+- `store/slides-ios.js`, `slides-ipad.js`, `slides-mac.js` (also builds the Windows set), `slides-android.js` — the 10 slides per platform.
 - `desk.html` — preview of desktop compositions (`?size=mac|ipad`), `screens.html` — kit screen gallery.
 
 QA helpers in `tools/`: `cmp.mjs ios 3 out.png [x0 y0 x1 y1]` (original | replica | 50% overlay), `bands.py` (text-band positions).
@@ -48,7 +49,7 @@ V1 is kept untouched in `v1/`. Exports for V2 need `V=vN` in front of the export
 
 ## Handoff
 
-- **Preview on …** opens a store-page mock (App Store, Mac App Store, Google Play) for the current device with the exported screenshots in a scrollable carousel.
+- **Preview on …** opens a store-page mock (App Store, Mac App Store, Microsoft Store, Google Play) for the current device with the exported screenshots in a scrollable carousel.
 - **Download all … (.zip)** downloads that device's 10 PNGs; hover a slide for **↓ Download**.
 - Files are named `LinkedPhone_<Device>_<NN>_<Slide-Title>_<WxH>.png` (e.g. `LinkedPhone_iOS_01_Your-Business-Phone-Reinvented_1290x2796.png`).
 - After exporting a new version, run `python3 "App Store Screenshots/tools/versions.py"` to refresh the version list and timestamps.

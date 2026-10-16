@@ -2,10 +2,11 @@
 import { launch } from '../../lib-chrome.mjs';
 import fs from 'fs';
 const [plat, list] = process.argv.slice(2);
-const SIZES = { ios: [1290, 2796], ipad: [2064, 2752], mac: [2880, 1800], android: [1440, 2880], androidS: [900, 1600] };
+const SIZES = { ios: [1290, 2796], ipad: [2064, 2752], mac: [2880, 1800], win: [3200, 1800], android: [1440, 2880], androidS: [900, 1600] };
 const [W, H] = SIZES[plat]; const ver = process.env.V || 'v1';
+const DPR = plat === 'win' ? 1.2 : 1;   // win: 3200×1800 layout → 3840×2160 PNG
 const out = `exports/${ver}/${plat}`; fs.mkdirSync(out, { recursive: true });
-const b = await launch(); const p = await b.newPage({ viewport: { width: W, height: H } });
+const b = await launch(); const p = await b.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: DPR });
 const errs = []; p.on('pageerror', e => errs.push(e.message));
 const ns = list ? list.split(',').map(Number) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 for (const n of ns) {
