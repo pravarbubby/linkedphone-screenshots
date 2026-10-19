@@ -47,6 +47,24 @@ QA helpers in `tools/`: `cmp.mjs ios 3 out.png [x0 y0 x1 y1]` (original | replic
 
 V1 is kept untouched in `v1/`. Exports for V2 need `V=vN` in front of the export command.
 
+## Product page headers (V19)
+
+V19 uses one brand system across all stores: a brand-blue world, Lisa as the main character, four white channel tiles with soft blurred tiles fading toward the edges, and the LinkedPhone mark as a faint watermark (it ties the art to the app icon). No store's art carries UI or text.
+
+Each tab shows its store's hero art above the slides (toggle **Safe area** to see the crop-safe zone); **Preview on …** shows it in place on a recreation of that storefront.
+
+| Store | Asset | Size | Rules followed |
+|---|---|---|---|
+| App Store (iPhone + iPad) | Product page header | 3840 × 1646 (21:9) | Safe area x1097–2743 · y493–1154 holds Lisa + the near tiles, clear of the back / share buttons; soft tiles outside it; no text, UI or phones |
+| Mac App Store | Product page header | 3840 × 1646 (21:9) | Same spec and same art as iPhone / iPad |
+| Google Play | Feature graphic | 1024 × 500 | Brand blue (not white), no device frames, no text; Microsoft composition scaled to 1024 × 500 |
+| Microsoft Store | 16:9 Super hero art | 3840 × 2160 | No text / UI / devices; key art centred and out of the bottom third |
+
+```bash
+V=v19 node "App Store Screenshots/tools/export-headers.mjs"      # → exports/v19/headers/{ios,mac,android,win}.png
+```
+Source: `v19/store/headers.js` (compositions), `v19/store/storefront.js` (store-page previews; the iPhone view uses Apple's crop: safe-area width at about 3:2).
+
 ## Handoff
 
 - **Preview on …** opens a store-page mock (App Store, Mac App Store, Microsoft Store, Google Play) for the current device with the exported screenshots in a scrollable carousel.

@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Desktop Compositions</title>
+<link rel="stylesheet" href="kit/ui.css"><link rel="stylesheet" href="kit/desktop.css"><link rel="stylesheet" href="store/store.css">
+<style>body{margin:0;background:#222;font:13px -apple-system;color:#ccc}main{display:flex;flex-wrap:wrap;gap:20px;padding:20px}.f{position:relative;overflow:hidden;background:#fff}.f>div{transform-origin:0 0}</style></head>
+<body><main id="m"></main>
+<script src="kit/icons.js"></script><script src="kit/tab-icons.js?v=16a"></script><script src="kit/ui.js"></script><script>window.SCREENS={}</script>
+<script src="screens/calls.js"></script><script src="screens/lisa.js"></script><script src="screens/messaging.js"></script>
+<script src="store/engine.js"></script><script src="store/m-screens.js"></script><script src="store/d-screens.js"></script>
+<script>
+const q=new URLSearchParams(location.search), sc=+(q.get('s')||.5), size=q.get('size')||'mac';
+const [W,H]= size==='mac'?[1428,901]:[1032,1352];
+const L=[['calls',{key:'michael'}],['calls',{key:'noah',overlay:'incoming'}],['calls',{key:'keisha',overlay:'transfer'}],['inbox',{key:'michael'}],['inbox',{key:'kevin',typed:'We’ll have them delivered by noon today. 💐',chips:1}],['tickets',{}],['receptionist',{}],['autoAttendant',{}],['team',{}],['business',{}]];
+(q.get('k')?L.filter((x,i)=>q.get('k').split(',').includes(String(i))):L).forEach(([k,o])=>{const f=document.createElement('div');f.className='f';f.style.cssText=`width:${W*sc}px;height:${H*sc}px`;
+ try{const r=DS[k]({W,H,...o});r.el.style.transform=`scale(${sc})`;f.append(r.el)}catch(e){f.textContent=k+': '+e.message;console.error(e)} m.append(f)});
+</script></body></html>
