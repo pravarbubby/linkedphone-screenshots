@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinkedPhone App Videos</title>
+<link rel="icon" href="mark.png">
+<style>
+:root {
+  --bg: #0e0f16; --panel-2: #1d2030; --line: #2a2e44;
+  --text: #eef0fa; --muted: #9aa0c3; --dim: #6b7096;
+  --accent: #4d7cff; --accent-soft: rgba(77,124,255,.16);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 var(--font); }
+button { font: inherit; color: inherit; }
+
+header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px 16px; padding: 14px 24px; border-bottom: 1px solid var(--line); background: rgba(14,15,22,.92); backdrop-filter: blur(10px); flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 700; white-space: nowrap; color: inherit; text-decoration: none; }
+.brand img { width: 24px; height: 24px; }
+.brand span { color: var(--muted); font-weight: 500; }
+.spacer { flex: 1; }
+.right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.seg { display: inline-flex; background: var(--panel-2); border-radius: 10px; padding: 3px; gap: 2px; box-shadow: inset 0 0 0 1px var(--line); }
+.seg button { border: 0; background: transparent; color: var(--muted); padding: 7px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.seg button:hover:not(:disabled):not([aria-pressed="true"]) { color: var(--text); }
+.seg button[aria-pressed="true"] { background: var(--text); color: #111219; }
+.seg button:disabled { opacity: .35; cursor: not-allowed; }
+.seg .tag { font-size: 9.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; margin-left: 6px; padding: 1px 5px; border-radius: 99px; background: var(--accent); color: #fff; vertical-align: 1px; }
+.seg button small { font-weight: 500; opacity: .7; margin-left: 4px; }
+#sizeSeg[hidden] { display: none; }
+
+.download { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; padding: 9px 16px; border-radius: 10px; white-space: nowrap; }
+.download:hover { filter: brightness(1.1); }
+.download small { font-weight: 500; opacity: .8; }
+
+main { max-width: 560px; margin: 0 auto; padding: 22px 16px 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.frame { position: relative; width: 100%; max-width: 380px; aspect-ratio: 9 / 16; max-height: calc(100vh - 300px); min-height: 360px; background: #000; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 20px 50px rgba(0,0,0,.45); }
+.frame video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; cursor: pointer; }
+
+.transport { display: flex; align-items: center; gap: 10px; width: 100%; }
+.transport button { background: var(--panel-2); border: 1px solid var(--line); border-radius: 9px; padding: 7px 12px; cursor: pointer; font-weight: 600; flex: none; min-width: 64px; }
+.transport button:hover { border-color: var(--accent); }
+.transport input[type=range] { flex: 1; min-width: 0; accent-color: var(--accent); }
+.time { font-variant-numeric: tabular-nums; color: var(--muted); flex: none; }
+
+.scenes { width: 100%; }
+.label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); margin: 0 0 8px; font-weight: 700; }
+.strip { display: flex; height: 32px; border-radius: 8px; overflow: hidden; gap: 2px; }
+.strip button { border: 0; background: var(--panel-2); color: var(--muted); font-size: 11px; font-weight: 600; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 4px; min-width: 0; }
+.strip button:hover { background: var(--accent-soft); color: var(--text); }
+.strip button.on { background: var(--accent); color: #fff; }
+.empty { color: var(--dim); font-size: 13px; }
+
+.about { width: 100%; color: #c4c8e4; font-size: 13.5px; border-top: 1px solid var(--line); padding-top: 14px; }
+.about p { margin: 0 0 6px; }
+.about .meta { color: var(--dim); font-size: 12px; }
+@media (max-width: 640px) { header { padding: 12px 16px; } .download small { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" id="home" href="../"><img src="mark.png" alt="">LinkedPhone <span>· App Videos</span></a>
+  <div class="seg" id="verSeg" role="group" aria-label="Version"></div>
+  <div class="spacer"></div>
+  <div class="right">
+    <div class="seg" id="sizeSeg" role="group" aria-label="Resolution" hidden></div>
+    <a class="download" id="download" href="#" download>Download <small id="dlInfo"></small></a>
+  </div>
+</header>
+
+<main>
+  <div class="seg" id="cutSeg" role="group" aria-label="Duration"></div>
+  <div class="frame"><video id="video" preload="metadata" playsinline></video></div>
+  <div class="transport">
+    <button id="playBtn">Play</button>
+    <input id="scrub" type="range" min="0" max="60" step="0.01" value="0" aria-label="Timeline">
+    <span class="time" id="time">0:00.0 / 0:00.0</span>
+    <button id="muteBtn">Mute</button>
+  </div>
+  <div class="scenes">
+    <div class="label">Scenes</div>
+    <div id="strip"></div>
+  </div>
+  <div class="about" id="about"></div>
+</main>
+
+<script>
+/* ------------------------------------------------------------------
+   Where files live
+   - Playback: previews/<preview>.mp4 (540×960 copies, next to this page).
+   - Downloads: the full-quality masters. On the website they come from the
+     public GitHub Release "videos"; in the local LP Video folder (hub/) they
+     come straight from ../versions/.
+------------------------------------------------------------------- */
+const RELEASE = 'https://github.com/pravarbubby/linkedphone-screenshots/releases/download/videos/';
+const LOCAL = /\/hub\/(index\.html)?$/.test(location.pathname);
+const dlHref = m => LOCAL ? '../versions/' + m.path : RELEASE + m.path.split('/').pop();
+if (LOCAL) document.getElementById('home').removeAttribute('href');
+
+/* ------------------------------------------------------------------
+   VERSION MANIFEST: add a new render by adding one object (newest first).
+   masters: one per resolution { path (under versions/), size in bytes }.
+   scenes: [name, seconds] in order, from that version's film/edits.js.
+------------------------------------------------------------------- */
+const V4_30 = [['Intro', 7], ['Inbox', 5], ['Calls', 4], ['Lisa', 4.5], ['Summary', 3.5], ['Kinetic', 2.5], ['End', 3.5]];
+const V4_60 = [['Hook', 5.5], ['Brand', 5], ['Number', 7.5], ['Inbox', 5.5], ['Texting', 6], ['Calls', 4.5], ['Lisa', 5.5], ['Summary', 6], ['Grow', 3.5], ['Kinetic', 2.5], ['Wall', 4], ['End', 4.5]];
+const scale = (sc, k) => sc.map(([n, d]) => [n, d * k]);
+const APPLE = '30 fps · H.264 High@4.0 · ~11 Mbps · AAC 256 kbps 48 kHz stereo';
+const ORIG = '60 fps · H.264 · AAC';
+const SIZES = { '1080': { label: '1080×1920', hint: '5.5″' }, '886': { label: '886×1920', hint: '6.5″ / 6.9″' } };
+
+const VERSIONS = [
+  { id: 'v5', label: 'V5', date: '2026-11-12',
+    notes: 'App Store ready. V4 re-encoded to Apple’s app preview spec at 29s and 59s, leaving 1 second of headroom. The picture and sound are the same, played 2–3% faster to fit. 886×1920 fits the whole frame and fills the top and bottom with a blur, so nothing is cropped.',
+    cuts: {
+      '30': { dur: 29, spec: APPLE, preview: 'LinkedPhone-v5-29s', scenes: scale(V4_30, 29 / 30), masters: {
+        '1080': { path: 'v5/LinkedPhone-v5-29s-1080x1920.mp4', size: 40208712 },
+        '886':  { path: 'v5/LinkedPhone-v5-29s-886x1920.mp4', size: 40094102 } } },
+      '60': { dur: 59, spec: APPLE, preview: 'LinkedPhone-v5-59s', scenes: scale(V4_60, 59 / 60), masters: {
+        '1080': { path: 'v5/LinkedPhone-v5-59s-1080x1920.mp4', size: 83043701 },
+        '886':  { path: 'v5/LinkedPhone-v5-59s-886x1920.mp4', size: 82527145 } } },
+    } },
+  { id: 'v4', label: 'V4', date: '2026-09-28',
+    notes: 'One continuous phone shot carries the app story. Every beat follows the same rhythm: the headline lands, the UI acts, the headline leaves.',
+    cuts: {
+      '30': { spec: ORIG, preview: 'LinkedPhone-v4-30s', scenes: V4_30, masters: { '1080': { path: 'v4/LinkedPhone-v4-30s.mp4', size: 68109768 } } },
+      '60': { spec: ORIG, preview: 'LinkedPhone-v4-60s', scenes: V4_60, masters: { '1080': { path: 'v4/LinkedPhone-v4-60s.mp4', size: 150246926 } } },
+    } },
+  { id: 'v3', label: 'V3', date: '2026-09-28',
+    notes: 'Introduced the continuous app shot, with number, inbox, texting and calls as its chapters.',
+    cuts: {
+      '30': { spec: ORIG, preview: 'LinkedPhone-v3-30s', masters: { '1080': { path: 'v3/LinkedPhone-v3-30s.mp4', size: 71359319 } },
+        scenes: [['Hook', 3.5], ['Brand', 5], ['Inbox', 3.5], ['Calls', 3.5], ['Lisa', 4.5], ['Summary', 4], ['Kinetic', 2.5], ['End', 3.5]] },
+      '60': { spec: ORIG, preview: 'LinkedPhone-v3-draft1-60s', masters: { '1080': { path: 'v3/draft1/LinkedPhone-v3-draft1-60s.mp4', size: 158147986 } },
+        scenes: [], note: 'The 60s of V3 exists only as draft 1.' },
+    } },
+  { id: 'v2', label: 'V2', date: '2026-09-28',
+    notes: 'Rebuilt on live replicas of the app screens, with separate shots per feature joined by whip and logo transitions.',
+    cuts: {
+      '30': { spec: ORIG, preview: 'LinkedPhone-v2-30s', masters: { '1080': { path: 'v2/LinkedPhone-v2-30s.mp4', size: 69964124 } },
+        scenes: [['Hook', 3.5], ['Brand', 3.5], ['Inbox', 5], ['Lisa', 5.5], ['Summary', 5.5], ['End', 7]] },
+      '60': { spec: ORIG, preview: 'LinkedPhone-v2-60s', masters: { '1080': { path: 'v2/LinkedPhone-v2-60s.mp4', size: 133036691 } },
+        scenes: [['Hook', 4.5], ['Brand', 4.5], ['Number', 5], ['Inbox', 6], ['Texting', 5], ['Lisa', 6.5], ['Calls', 6.5], ['Summary', 6], ['Desktop', 5.5], ['Kinetic', 2.5], ['End', 8]] },
+    } },
+  { id: 'v1', label: 'V1', date: '2026-09-28',
+    notes: 'The original intro, built by slicing the supplied app screenshots into bands and cards.',
+    cuts: {
+      '60': { spec: ORIG, preview: 'LinkedPhone-Intro-v1-60s', masters: { '1080': { path: 'v1/LinkedPhone-Intro-v1-60s.mp4', size: 149651380 } },
+        scenes: [['Missed calls', 5], ['Brand', 4], ['Onboarding', 7.5], ['Inbox', 8.5], ['Lisa', 5], ['Setup', 8], ['Live call', 8], ['Performance', 6], ['Wall', 4], ['End', 4]] },
+    } },
+];
+const CUTS = ['30', '60'];
+
+/* ------------------------------------------------------------------ */
+const $ = s => document.querySelector(s);
+const video = $('#video');
+const fmtSize = b => Math.round(b / 1048576) + ' MB';
+const fmtT = t => { t = Math.max(0, t || 0); const m = Math.floor(t / 60); return m + ':' + (t - m * 60).toFixed(1).padStart(4, '0'); };
+
+const q = new URLSearchParams(location.search);
+const state = {
+  ver: VERSIONS.find(v => v.id === q.get('v')) ? q.get('v') : VERSIONS[0].id,  // latest by default
+  cut: CUTS.includes(q.get('cut')) ? q.get('cut') : '30',
+  size: SIZES[q.get('size')] ? q.get('size') : '886',
+};
+const cur = () => VERSIONS.find(v => v.id === state.ver);
+
+VERSIONS.slice().reverse().forEach(v => {
+  const b = document.createElement('button');
+  b.dataset.id = v.id;
+  b.innerHTML = v.label + (v === VERSIONS[0] ? '<span class="tag">Latest</span>' : '');
+  b.onclick = () => { state.ver = v.id; render(); };
+  $('#verSeg').append(b);
+});
+CUTS.forEach(c => {
+  const b = document.createElement('button');
+  b.dataset.cut = c;
+  b.onclick = () => { state.cut = c; render(); };
+  $('#cutSeg').append(b);
+});
+Object.entries(SIZES).forEach(([k, s]) => {
+  const b = document.createElement('button');
+  b.dataset.size = k; b.innerHTML = `${s.label}<small>${s.hint}</small>`;
+  b.title = `For the ${s.hint} iPhone app preview slot`;
+  b.onclick = () => { state.size = k; render(); };
+  $('#sizeSeg').append(b);
+});
+
+function render() {
+  const v = cur();
+  if (!v.cuts[state.cut]) state.cut = CUTS.find(c => v.cuts[c]);
+  const c = v.cuts[state.cut];
+  const sizes = Object.keys(c.masters);
+  const size = sizes.includes(state.size) ? state.size : sizes[0];
+  const m = c.masters[size];
+  const durS = (c.dur || state.cut) + 's';
+
+  $('#verSeg').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.id === v.id));
+  $('#cutSeg').querySelectorAll('button').forEach(b => {
+    const k = b.dataset.cut;
+    b.textContent = (v.cuts[k]?.dur || k) + ' seconds';
+    b.setAttribute('aria-pressed', k === state.cut);
+    b.disabled = !v.cuts[k];
+    b.title = b.disabled ? `${v.label} has no ${k}s cut` : '';
+  });
+  $('#sizeSeg').hidden = sizes.length < 2;
+  $('#sizeSeg').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.size === size));
+
+  const dl = $('#download');
+  dl.href = dlHref(m); dl.setAttribute('download', m.path.split('/').pop());
+  $('#dlInfo').textContent = `${v.label} · ${durS} · ${SIZES[size].label}${m.size ? ' · ' + fmtSize(m.size) : ''}`;
+
+  const src = 'previews/' + c.preview + '.mp4';
+  if (video.getAttribute('src') !== src) { video.pause(); video.src = src; video.poster = 'posters/' + c.preview + '.jpg'; }
+
+  const strip = $('#strip'); strip.innerHTML = '';
+  const sc = scenes();
+  if (!sc.length) strip.innerHTML = '<div class="empty">No scene breakdown for this render.</div>';
+  else {
+    const row = document.createElement('div'); row.className = 'strip';
+    sc.forEach((s, i) => {
+      const b = document.createElement('button');
+      b.style.flex = s.d; b.textContent = s.n; b.title = `${i + 1}. ${s.n} · ${fmtT(s.start)}`;
+      b.onclick = () => seek(s.start + .01);
+      row.append(b);
+    });
+    strip.append(row);
+  }
+
+  $('#about').innerHTML = `<p>${v.notes}</p><div class="meta">${v.label} · ${durS} · ${SIZES[size].label} · ${c.spec}${m.size ? ' · ' + fmtSize(m.size) : ''} · rendered ${v.date}${c.note ? ' · ' + c.note : ''}</div>`;
+
+  const url = new URL(location); url.searchParams.set('v', v.id); url.searchParams.set('cut', state.cut);
+  if (sizes.length > 1) url.searchParams.set('size', size); else url.searchParams.delete('size');
+  history.replaceState(null, '', url);
+  tick();
+}
+
+function scenes() { let t = 0; return cur().cuts[state.cut].scenes.map(([n, d]) => { const s = { n, d, start: t }; t += d; return s; }); }
+function tick() {
+  $('#scrub').max = video.duration || 60;
+  $('#scrub').value = video.currentTime;
+  $('#time').textContent = fmtT(video.currentTime) + ' / ' + fmtT(video.duration);
+  const t = video.currentTime, sc = scenes();
+  document.querySelectorAll('.strip button').forEach((b, i) => b.classList.toggle('on', t >= sc[i].start && t < sc[i].start + sc[i].d));
+}
+function seek(t) { video.currentTime = Math.max(0, Math.min(t, video.duration || t)); tick(); }
+function toggle() { video.paused ? video.play().catch(() => {}) : video.pause(); }
+
+video.addEventListener('loadedmetadata', tick);
+video.addEventListener('timeupdate', tick);
+video.addEventListener('play', () => $('#playBtn').textContent = 'Pause');
+video.addEventListener('pause', () => $('#playBtn').textContent = 'Play');
+video.addEventListener('emptied', () => $('#playBtn').textContent = 'Play');
+video.addEventListener('click', toggle);
+$('#playBtn').onclick = toggle;
+$('#scrub').oninput = e => seek(+e.target.value);
+$('#muteBtn').onclick = () => { video.muted = !video.muted; $('#muteBtn').textContent = video.muted ? 'Unmute' : 'Mute'; };
+document.addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey) return;
+  if (e.code === 'Space') { e.preventDefault(); toggle(); }
+  else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); seek(video.currentTime + (e.shiftKey ? 5 : 1) * (e.key === 'ArrowRight' ? 1 : -1)); }
+});
+
+render();
+</script>
+</body>
+</html>
