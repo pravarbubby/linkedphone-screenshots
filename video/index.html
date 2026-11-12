@@ -115,14 +115,14 @@ const SIZES = { '1080': { label: '1080×1920', hint: '5.5″' }, '886': { label:
 
 const VERSIONS = [
   { id: 'v5', label: 'V5', date: '2026-11-12',
-    notes: 'App Store ready. V4 re-encoded to Apple’s app preview spec at 29s and 59s, leaving 1 second of headroom. The picture and sound are the same, played 2–3% faster to fit. 886×1920 fits the whole frame and fills the top and bottom with a blur, so nothing is cropped.',
+    notes: 'App Store ready. V4 re-encoded to Apple’s app preview spec at 29s and 59s, leaving 1 second of headroom. The picture and sound are the same, played 2–3% faster to fit. 886×1920 is rendered natively at that shape: the same picture with the background continuing above and below, so nothing is cropped.',
     cuts: {
       '30': { dur: 29, spec: APPLE, preview: 'LinkedPhone-v5-29s', scenes: scale(V4_30, 29 / 30), masters: {
         '1080': { path: 'v5/LinkedPhone-v5-29s-1080x1920.mp4', size: 40208712 },
-        '886':  { path: 'v5/LinkedPhone-v5-29s-886x1920.mp4', size: 40094102 } } },
+        '886':  { path: 'v5/LinkedPhone-v5-29s-886x1920.mp4', size: 40425459 } } },
       '60': { dur: 59, spec: APPLE, preview: 'LinkedPhone-v5-59s', scenes: scale(V4_60, 59 / 60), masters: {
         '1080': { path: 'v5/LinkedPhone-v5-59s-1080x1920.mp4', size: 83043701 },
-        '886':  { path: 'v5/LinkedPhone-v5-59s-886x1920.mp4', size: 82527145 } } },
+        '886':  { path: 'v5/LinkedPhone-v5-59s-886x1920.mp4', size: 82874199 } } },
     } },
   { id: 'v4', label: 'V4', date: '2026-09-28',
     notes: 'One continuous phone shot carries the app story. Every beat follows the same rhythm: the headline lands, the UI acts, the headline leaves.',
